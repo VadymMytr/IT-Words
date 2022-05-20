@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ua.vadymmy.it.words.data.api.images.ImageApi
 import ua.vadymmy.it.words.data.api.images.ImageRepository
-import ua.vadymmy.it.words.domain.api.repositories.ImageApiRepository
+import ua.vadymmy.it.words.domain.api.images.ImageApiRepository
 
 @Module
 class ApiModule {

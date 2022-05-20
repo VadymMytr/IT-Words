@@ -7,12 +7,11 @@ import ua.vadymmy.it.words.domain.entities.WordImage
 @Reusable
 class ImagesResponseMapper @Inject constructor() {
 
-    fun ImageApiResponse.mapToWordImages(): List<WordImage> =
-        if (value.isNotEmpty()) value.map { it.mapToWordImage() }
+    fun List<ImageApiEntry>.mapToWordImages(): List<WordImage> =
+        if (isNotEmpty()) map { it.mapToWordImage() }
         else listOf(WordImage.empty)
 
     fun ImageApiEntry?.mapToWordImage() = this?.let {
         WordImage(contentUrl, "#$accentColor")
     } ?: WordImage.empty
-
 }

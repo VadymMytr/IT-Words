@@ -3,9 +3,9 @@ package ua.vadymmy.it.words.domain.entities
 import android.graphics.Color
 import androidx.annotation.ColorInt
 
-data class WordImage(val url: String, val colorHex: String) {
-    @ColorInt
-    val color = Color.parseColor(colorHex)
+data class WordImage constructor(val url: String, val colorHex: String) {
+
+    val color get() = Color.parseColor(colorHex)
     val isNotEmpty = url.isNotEmpty()
 
     companion object {

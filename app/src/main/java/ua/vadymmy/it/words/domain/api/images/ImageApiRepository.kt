@@ -1,4 +1,4 @@
-package ua.vadymmy.it.words.domain.api.repositories
+package ua.vadymmy.it.words.domain.api.images
 
 import ua.vadymmy.it.words.domain.entities.WordImage
 
