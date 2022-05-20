@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "862495921780",
+    "project_id": "it-words-de679",
+    "storage_bucket": "it-words-de679.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862495921780:android:c577b530ca7d5a8ed32321",
+        "android_client_info": {
+          "package_name": "ua.vadymmy.it.words"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862495921780-q7he038d0dvi1vnj76cj6lmapi85s8ec.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM9IGv_CCf8jYUBpTRXXDyq9Em_zBEtOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862495921780-q7he038d0dvi1vnj76cj6lmapi85s8ec.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
