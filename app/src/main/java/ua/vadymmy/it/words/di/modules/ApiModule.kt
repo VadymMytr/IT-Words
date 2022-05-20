@@ -6,8 +6,11 @@ import javax.inject.Singleton
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ua.vadymmy.it.words.data.api.images.ImageApi
-import ua.vadymmy.it.words.data.api.images.ImageRepository
-import ua.vadymmy.it.words.domain.api.images.ImageApiRepository
+import ua.vadymmy.it.words.data.api.images.ImageApiRepository
+import ua.vadymmy.it.words.data.api.transcriptions.TranscriptionApi
+import ua.vadymmy.it.words.data.api.transcriptions.TranscriptionApiRepository
+import ua.vadymmy.it.words.domain.api.images.ImageRepository
+import ua.vadymmy.it.words.domain.api.transcription.TranscriptionRepository
 
 @Module
 class ApiModule {
@@ -26,15 +29,32 @@ class ApiModule {
 
     companion object {
         private const val IMAGE_API_URL = "https://bing-image-search1.p.rapidapi.com/"
+        private const val TRANSCRIPTION_API_URL = "https://wordsapiv1.p.rapidapi.com/"
     }
 
     @Provides
     @Singleton
-    fun provideImageApi(): ImageApi = RetrofitBuilder(ImageApi::class.java, IMAGE_API_URL).build()
+    fun provideImageApi(): ImageApi = RetrofitBuilder(
+        ImageApi::class.java,
+        IMAGE_API_URL
+    ).build()
 
     @Provides
     @Singleton
-    fun provideImageRepository(imageRepository: ImageRepository): ImageApiRepository {
-        return imageRepository
-    }
+    fun provideImageRepository(
+        imageApiRepository: ImageApiRepository
+    ): ImageRepository = imageApiRepository
+
+    @Provides
+    @Singleton
+    fun provideTranscriptionApi(): TranscriptionApi = RetrofitBuilder(
+        TranscriptionApi::class.java,
+        TRANSCRIPTION_API_URL
+    ).build()
+
+    @Provides
+    @Singleton
+    fun provideTranscriptionRepository(
+        transcriptionApiRepository: TranscriptionApiRepository
+    ): TranscriptionRepository = transcriptionApiRepository
 }

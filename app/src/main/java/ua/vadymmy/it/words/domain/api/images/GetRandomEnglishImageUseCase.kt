@@ -2,14 +2,12 @@ package ua.vadymmy.it.words.domain.api.images
 
 import dagger.Reusable
 import javax.inject.Inject
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.flowOn
 import ua.vadymmy.it.words.domain.common.BackgroundUseCase
 import ua.vadymmy.it.words.domain.entities.WordImage
 
 @Reusable
 class GetRandomEnglishImageUseCase @Inject constructor(
-    private val imageApiRepository: ImageApiRepository
+    private val imageRepository: ImageRepository
 ) : BackgroundUseCase<Unit, WordImage>() {
 
     private companion object {
@@ -18,6 +16,6 @@ class GetRandomEnglishImageUseCase @Inject constructor(
     }
 
     override suspend fun execute(request: Unit): WordImage {
-        return imageApiRepository.findImages(ENGLISH_QUERY, ENGLISH_ITEMS_COUNT).random()
+        return imageRepository.findImages(ENGLISH_QUERY, ENGLISH_ITEMS_COUNT).random()
     }
 }

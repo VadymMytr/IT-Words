@@ -1,13 +1,10 @@
 package ua.vadymmy.it.words.data.api.images
 
 import javax.inject.Inject
-import ua.vadymmy.it.words.domain.api.images.ImageApiRepository
+import ua.vadymmy.it.words.domain.api.images.ImageRepository
 import ua.vadymmy.it.words.domain.entities.WordImage
 
-class ImageRepository @Inject constructor(
-    private val imageApi: ImageApi,
-    private val imagesResponseMapper: ImagesResponseMapper
-) : ImageApiRepository {
+class ImageApiRepository @Inject constructor(private val imageApi: ImageApi) : ImageRepository {
 
     companion object {
         private const val ONE_IMAGE = 1
@@ -22,14 +19,10 @@ class ImageRepository @Inject constructor(
         }
 
     override suspend fun findImage(query: String): WordImage {
-        with(imagesResponseMapper) {
-            return processQuery(query, ONE_IMAGE).firstOrNull().mapToWordImage()
-        }
+        return processQuery(query, ONE_IMAGE).firstOrNull().mapToWordImage()
     }
 
     override suspend fun findImages(query: String, count: Int): List<WordImage> {
-        with(imagesResponseMapper) {
-            return processQuery(query, count).mapToWordImages()
-        }
+        return processQuery(query, count).mapToWordImages()
     }
 }
