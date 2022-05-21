@@ -4,6 +4,7 @@ import javax.inject.Inject
 import ua.vadymmy.it.words.domain.api.data.LocalRepository
 import ua.vadymmy.it.words.domain.entities.user.User
 import ua.vadymmy.it.words.domain.entities.word.common.Word
+import ua.vadymmy.it.words.domain.entities.word.kit.LearningWordKit
 import ua.vadymmy.it.words.domain.entities.word.kit.WordKit
 import ua.vadymmy.it.words.utils.AuthHelper
 
@@ -20,16 +21,20 @@ class RoomDataRepository @Inject constructor(
     override suspend fun updateWordProgress(word: Word) {
     }
 
-    override suspend fun addLearningWordKit(wordKit: WordKit) {
+    override suspend fun addLearningWordKit(learningWordKit: LearningWordKit) {
     }
 
-    override suspend fun updateLearningWordKit(wordKit: WordKit) {
+    override suspend fun updateLearningWordKit(learningWordKit: LearningWordKit) {
     }
 
-    override suspend fun removeLearningWordKit(wordKit: WordKit) {
+    override suspend fun removeLearningWordKit(learningWordKit: LearningWordKit) {
     }
 
-    override suspend fun getLearningWordKits(): List<WordKit> {
+    override suspend fun getLearningWordKits(): List<LearningWordKit> {
+        return emptyList()
+    }
+
+    override suspend fun getPredefinedWordKits(): List<WordKit> {
         return emptyList()
     }
 }
