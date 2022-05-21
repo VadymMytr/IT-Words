@@ -1,16 +1,15 @@
 package ua.vadymmy.it.words.data.local
 
 import javax.inject.Inject
-import javax.inject.Singleton
-import ua.vadymmy.it.words.domain.api.data.ClientRepository
+import ua.vadymmy.it.words.domain.api.data.LocalRepository
 import ua.vadymmy.it.words.domain.entities.user.User
 import ua.vadymmy.it.words.domain.entities.word.common.Word
 import ua.vadymmy.it.words.domain.entities.word.kit.WordKit
 import ua.vadymmy.it.words.utils.AuthHelper
 
-class LocalDataRepository @Inject constructor(
+class RoomDataRepository @Inject constructor(
     private val authHelper: AuthHelper
-) : ClientRepository {
+) : LocalRepository {
 
     override suspend fun loginUser(user: User) {
     }

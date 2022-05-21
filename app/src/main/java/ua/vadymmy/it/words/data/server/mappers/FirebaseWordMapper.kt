@@ -7,8 +7,8 @@ import ua.vadymmy.it.words.utils.findBoolean
 import ua.vadymmy.it.words.utils.findInt
 import ua.vadymmy.it.words.utils.findString
 
-private const val KEY_ORIGINAL = "word_original"
-private const val KEY_TRANSLATE = "word_translate"
+const val KEY_ORIGINAL = "word_original"
+const val KEY_TRANSLATE = "word_translate"
 private const val KEY_TRANSCRIPTION = "word_transcription"
 private const val KEY_IMAGE_URL = "word_image_url"
 private const val KEY_IMAGE_COLOR = "word_image_color"

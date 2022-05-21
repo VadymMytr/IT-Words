@@ -1,25 +1,34 @@
 package ua.vadymmy.it.words.data.server
 
 import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import javax.inject.Inject
 import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import ua.vadymmy.it.words.data.server.mappers.KEY_ORIGINAL
+import ua.vadymmy.it.words.data.server.mappers.KEY_TRANSLATE
 import ua.vadymmy.it.words.data.server.mappers.complaintsHashMap
 import ua.vadymmy.it.words.data.server.mappers.learningHashMap
 import ua.vadymmy.it.words.data.server.mappers.mapToHashMap
 import ua.vadymmy.it.words.data.server.mappers.mapToWord
 import ua.vadymmy.it.words.data.server.mappers.mapToWordKit
+import ua.vadymmy.it.words.data.server.mappers.mapToWordKitInfo
 import ua.vadymmy.it.words.data.server.mappers.wordProgress
 import ua.vadymmy.it.words.data.server.mappers.wordsUUIDs
 import ua.vadymmy.it.words.data.server.mappers.wordsUUIDsHashMap
 import ua.vadymmy.it.words.domain.api.data.ServerRepository
 import ua.vadymmy.it.words.domain.entities.user.User
 import ua.vadymmy.it.words.domain.entities.word.common.Word
+import ua.vadymmy.it.words.domain.entities.word.common.WordParameters
 import ua.vadymmy.it.words.domain.entities.word.common.WordProgress
 import ua.vadymmy.it.words.domain.entities.word.kit.WordKit
+import ua.vadymmy.it.words.domain.entities.word.kit.WordKitInfo
+import ua.vadymmy.it.words.domain.entities.word.search.SearchLocale.EN
+import ua.vadymmy.it.words.domain.entities.word.search.SearchLocale.UK
+import ua.vadymmy.it.words.domain.entities.word.search.SearchParameters
 import ua.vadymmy.it.words.utils.AuthHelper
 import ua.vadymmy.it.words.utils.resume
 import kotlin.coroutines.resume
@@ -80,76 +89,139 @@ class FirebaseServerRepository @Inject constructor(
 
     override suspend fun addLearningWordKit(wordKit: WordKit) =
         suspendCoroutine<Unit> { continuation ->
-            learningKits.document(wordKit.uuid).set(wordKit.mapToHashMap()).addCompleteListener {
-                continuation.resume()
+            learningKits.document(wordKit.info.uuid)
+                .set(wordKit.mapToHashMap())
+                .addCompleteListener { continuation.resume() }
+        }
+
+    override suspend fun getLearningWordKits(): List<WordKit> {
+        val kits = CompletableDeferred<List<WordKit>>()
+
+        learningKits.get().addOnSuccessListener { query ->
+            CoroutineScope(Dispatchers.IO).launch {
+                if (query.documents.isEmpty()) {
+                    kits.complete(emptyList())
+                    return@launch
+                }
+
+                query.documents.map { doc ->
+                    doc.mapToWordKit(getWords(doc.wordsUUIDs))
+                }.let {
+                    kits.complete(it)
+                }
+            }
+        }.addOnFailureListener {
+            it.printStackTrace()
+            kits.complete(emptyList())
+        }
+
+        return kits.await()
+    }
+
+    override suspend fun getPredefinedKitsInfo(): List<WordKitInfo> {
+        val kitInfoList = CompletableDeferred<List<WordKitInfo>>()
+
+        predefinedKits.get().addOnSuccessListener { query ->
+            CoroutineScope(Dispatchers.IO).launch {
+                if (query.documents.isEmpty()) {
+                    kitInfoList.complete(emptyList())
+                    return@launch
+                }
+
+                query.documents.filterNot {
+                    isPredefinedKitLearning(it.id)
+                }.map { doc ->
+                    doc.mapToWordKitInfo()
+                }.let {
+                    kitInfoList.complete(it)
+                }
+            }
+        }.addOnFailureListener {
+            it.printStackTrace()
+            kitInfoList.complete(listOf())
+        }
+
+        return kitInfoList.await()
+    }
+
+    override suspend fun getPredefinedKitDetails(uuid: String): WordKit {
+        val kit = CompletableDeferred<WordKit>()
+
+        predefinedKits.document(uuid).get().addCompleteListener { doc ->
+            CoroutineScope(Dispatchers.IO).launch {
+                val predefinedKit = doc.mapToWordKit(getWords(doc.wordsUUIDs))
+                kit.complete(predefinedKit)
             }
         }
 
-    override suspend fun getLearningWordKits(): List<WordKit> = getWordsKits(learningKits)
-
-    override suspend fun addPredefinedWordKit(wordKit: WordKit) =
-        suspendCoroutine<Unit> { continuation ->
-            predefinedKits.document(wordKit.uuid).set(wordKit.mapToHashMap()).addCompleteListener {
-                continuation.resume()
-            }
-        }
-
-    override suspend fun getPredefinedKits(): List<WordKit> = getWordsKits(
-        predefinedKits,
-        this::isPredefinedKitNotLearning
-    )
+        return kit.await()
+    }
 
     override suspend fun removeLearningWordKit(wordKit: WordKit) =
         suspendCoroutine<Unit> { continuation ->
-            learningKits.document(wordKit.uuid).delete().addCompleteListener {
+            learningKits.document(wordKit.info.uuid).delete().addCompleteListener {
                 continuation.resume()
             }
         }
 
     override suspend fun updateLearningWordKit(wordKit: WordKit) =
         suspendCoroutine<Unit> { continuation ->
-            learningKits.document(wordKit.uuid).set(wordKit.wordsUUIDsHashMap).addCompleteListener {
-                continuation.resume()
-            }
-        }
-
-    private suspend fun getWordsKits(
-        collection: CollectionReference,
-        isKitRequired: suspend (uuid: String) -> Boolean = { _ -> true }
-    ): List<WordKit> {
-        val kitsDeferred = CompletableDeferred<List<WordKit>>()
-        val kits = mutableListOf<WordKit>()
-
-        collection.get().addOnSuccessListener { query ->
-            runBlocking {
-                query.forEach { doc ->
-                    if (isKitRequired(doc.id)) {
-                        val words = getWords(doc.wordsUUIDs)
-                        kits.add(doc.mapToWordKit(words))
-                    }
+            learningKits.document(wordKit.info.uuid).set(wordKit.wordsUUIDsHashMap)
+                .addCompleteListener {
+                    continuation.resume()
                 }
-
-                kitsDeferred.complete(kits)
-            }
-        }.addOnFailureListener {
-            it.printStackTrace()
-            kitsDeferred.complete(listOf())
         }
 
-        return kitsDeferred.await()
-    }
+    override suspend fun isWordExists(wordParameters: WordParameters) =
+        suspendCoroutine<Boolean> { continuation ->
+            words.whereEqualTo(KEY_ORIGINAL, wordParameters.original)
+                .whereEqualTo(KEY_TRANSLATE, wordParameters.translate)
+                .get()
+                .addCompleteListener {
+                    continuation.resume(it.documents.isNotEmpty())
+                }
+        }
 
-    private suspend fun isPredefinedKitNotLearning(uuid: String) =
+    override suspend fun searchWords(searchParameters: SearchParameters): List<Word> =
+        suspendCoroutine { continuation ->
+            val field = when (searchParameters.locale) {
+                EN -> KEY_ORIGINAL
+                UK -> KEY_TRANSLATE
+            }
+
+            words.orderBy(field)
+                .startAfter(searchParameters.startAt)
+                .endBefore(searchParameters.endBefore)
+                .limit(SEARCH_LIMIT)
+                .get()
+                .addOnSuccessListener {
+                    val words = it.documents.map { doc -> doc.mapToWord() }.filter { word ->
+                        val text = if (field == KEY_ORIGINAL) word.original else word.translate
+                        return@filter text.startsWith(prefix = searchParameters.query)
+                    }
+
+                    continuation.resume(words)
+                }.addOnFailureListener {
+                    it.printStackTrace()
+                    continuation.resume(emptyList())
+                }
+        }
+
+    private suspend fun isPredefinedKitLearning(uuid: String) =
         suspendCoroutine<Boolean> { continuation ->
             learningKits.document(uuid).get().addCompleteListener {
-                continuation.resume(!it.exists())
+                continuation.resume(it.exists())
             }
         }
 
-    private suspend fun getWords(uuids: List<String>): List<Word> = uuids.mapNotNull { getWord(it) }
+    private suspend fun getWords(uuidList: List<String>): List<Word> = uuidList.mapNotNull { uuid ->
+        getWord(uuid)
+    }
 
-    private suspend fun getWord(uuid: String): Word? = findWord(uuid)?.apply {
-        progress = findWordProgress(uuid)
+    private suspend fun getWord(uuid: String): Word? {
+        return findWord(uuid)?.apply {
+            progress = findWordProgress(uuid)
+        }
     }
 
     private suspend fun findWord(uuid: String) = suspendCoroutine<Word?> { continuation ->
@@ -197,5 +269,6 @@ class FirebaseServerRepository @Inject constructor(
         private const val WORDS_KITS_COLLECTION = "Predefined Kits"
         private const val LEARNING_WORDS_COLLECTION = "Learning Words Progress"
         private const val LEARNING_KITS_COLLECTION = "Learning Kits"
+        private const val SEARCH_LIMIT = 10L
     }
 }
