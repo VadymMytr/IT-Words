@@ -9,6 +9,10 @@ import ua.vadymmy.it.words.data.api.images.ImageApi
 import ua.vadymmy.it.words.data.api.images.ImageApiRepository
 import ua.vadymmy.it.words.data.api.transcriptions.TranscriptionApi
 import ua.vadymmy.it.words.data.api.transcriptions.TranscriptionApiRepository
+import ua.vadymmy.it.words.data.local.LocalDataRepository
+import ua.vadymmy.it.words.data.server.FirebaseServerRepository
+import ua.vadymmy.it.words.domain.api.data.ClientRepository
+import ua.vadymmy.it.words.domain.api.data.ServerRepository
 import ua.vadymmy.it.words.domain.api.images.ImageRepository
 import ua.vadymmy.it.words.domain.api.transcription.TranscriptionRepository
 
@@ -57,4 +61,16 @@ class ApiModule {
     fun provideTranscriptionRepository(
         transcriptionApiRepository: TranscriptionApiRepository
     ): TranscriptionRepository = transcriptionApiRepository
+
+    @Provides
+    @Singleton
+    fun provideLocalDataRepository(
+        localDataRepository: LocalDataRepository
+    ): ClientRepository = localDataRepository
+
+    @Provides
+    @Singleton
+    fun provideServerDataRepository(
+        firebaseServerRepository: FirebaseServerRepository
+    ): ServerRepository = firebaseServerRepository
 }

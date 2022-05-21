@@ -10,6 +10,7 @@ class TranscriptionApiRepository @Inject constructor(
     private companion object {
         private const val HYPHEN = "-"
         private const val SPACE = " "
+        private const val EMPTY = ""
     }
 
     override suspend fun getTranscriptionFor(wordOriginal: String): String {
@@ -17,15 +18,26 @@ class TranscriptionApiRepository @Inject constructor(
             wordOriginal.split(HYPHEN, SPACE).forEach {
                 append(
                     try {
-                        transcriptionApi.getPronunciationOf(it).mapToTranscription().plus(SPACE)
+                        val text = transcriptionApi.getPronunciationOf(it).mapToTranscription()
+
+                        //remove redundant symbols
+                        text.replace("[", EMPTY)
+                            .replace("]", EMPTY)
+                            .replace("/", EMPTY).let { result ->
+                                if (result.isNotEmpty()) result.plus(SPACE)
+                                else result
+                            }
                     } catch (ex: Exception) {
                         ex.printStackTrace()
-                        SPACE
+                        EMPTY
                     }
                 )
             }
         }
 
-        return "[${transcriptionBuilder.removeSuffix(SPACE)}]"
+        return transcriptionBuilder.takeIf { it.isNotEmpty() }
+            ?.removeSuffix(SPACE)
+            ?.let { return@let "[$it]" }
+            ?: EMPTY
     }
 }

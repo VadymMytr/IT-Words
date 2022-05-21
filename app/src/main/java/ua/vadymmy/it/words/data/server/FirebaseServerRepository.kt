@@ -4,7 +4,6 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import dagger.Reusable
 import javax.inject.Inject
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.runBlocking
@@ -26,7 +25,6 @@ import ua.vadymmy.it.words.utils.resume
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-@Reusable
 class FirebaseServerRepository @Inject constructor(
     private val authHelper: AuthHelper
 ) : ServerRepository {
@@ -184,11 +182,13 @@ class FirebaseServerRepository @Inject constructor(
         }
 
     private fun <T> Task<T>.addCompleteListener(onCompleted: (data: T) -> Unit) {
-        if (!this.isSuccessful) {
-            exception?.printStackTrace()
-        }
+        addOnCompleteListener {
+            if (!it.isSuccessful) {
+                exception?.printStackTrace()
+            }
 
-        onCompleted(this.result)
+            onCompleted(it.result)
+        }
     }
 
     private companion object {
