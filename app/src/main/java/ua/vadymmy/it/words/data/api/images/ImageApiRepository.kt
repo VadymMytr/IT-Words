@@ -2,7 +2,7 @@ package ua.vadymmy.it.words.data.api.images
 
 import javax.inject.Inject
 import ua.vadymmy.it.words.domain.api.images.ImageRepository
-import ua.vadymmy.it.words.domain.entities.WordImage
+import ua.vadymmy.it.words.domain.entities.word.common.WordImage
 
 class ImageApiRepository @Inject constructor(private val imageApi: ImageApi) : ImageRepository {
 

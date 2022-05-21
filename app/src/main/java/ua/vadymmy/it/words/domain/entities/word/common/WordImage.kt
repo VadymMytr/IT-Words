@@ -1,7 +1,6 @@
-package ua.vadymmy.it.words.domain.entities
+package ua.vadymmy.it.words.domain.entities.word.common
 
 import android.graphics.Color
-import androidx.annotation.ColorInt
 
 data class WordImage constructor(val url: String, val colorHex: String) {
 
