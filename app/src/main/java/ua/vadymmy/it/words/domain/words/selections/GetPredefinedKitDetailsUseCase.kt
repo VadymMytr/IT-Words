@@ -10,9 +10,9 @@ import ua.vadymmy.it.words.domain.entities.word.kit.WordKitInfo
 @Reusable
 class GetPredefinedKitDetailsUseCase @Inject constructor(
     private val serverRepository: ServerRepository
-) : BackgroundUseCase<WordKitInfo, WordKit>() {
+) : BackgroundUseCase<WordKitInfo, WordKit?>() {
 
-    override suspend fun execute(request: WordKitInfo): WordKit {
+    override suspend fun execute(request: WordKitInfo): WordKit? {
         return serverRepository.getPredefinedKitDetails(request.uuid)
     }
 }

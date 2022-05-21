@@ -30,12 +30,14 @@ import ua.vadymmy.it.words.domain.entities.word.search.SearchLocale.EN
 import ua.vadymmy.it.words.domain.entities.word.search.SearchLocale.UK
 import ua.vadymmy.it.words.domain.entities.word.search.SearchParameters
 import ua.vadymmy.it.words.utils.AuthHelper
+import ua.vadymmy.it.words.utils.NetworkHelper
 import ua.vadymmy.it.words.utils.resume
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class FirebaseServerRepository @Inject constructor(
-    private val authHelper: AuthHelper
+    private val authHelper: AuthHelper,
+    private val networkHelper: NetworkHelper
 ) : ServerRepository {
 
     private val db get() = Firebase.firestore
@@ -144,12 +146,12 @@ class FirebaseServerRepository @Inject constructor(
         return kitInfoList.await()
     }
 
-    override suspend fun getPredefinedKitDetails(uuid: String): WordKit {
-        val kit = CompletableDeferred<WordKit>()
+    override suspend fun getPredefinedKitDetails(uuid: String): WordKit? {
+        val kit = CompletableDeferred<WordKit?>()
 
         predefinedKits.document(uuid).get().addCompleteListener { doc ->
             CoroutineScope(Dispatchers.IO).launch {
-                val predefinedKit = doc.mapToWordKit(getWords(doc.wordsUUIDs))
+                val predefinedKit = doc?.mapToWordKit(getWords(doc.wordsUUIDs))
                 kit.complete(predefinedKit)
             }
         }
@@ -178,7 +180,7 @@ class FirebaseServerRepository @Inject constructor(
                 .whereEqualTo(KEY_TRANSLATE, wordParameters.translate)
                 .get()
                 .addCompleteListener {
-                    continuation.resume(it.documents.isNotEmpty())
+                    continuation.resume(it?.documents.isNullOrEmpty().not())
                 }
         }
 
@@ -210,7 +212,7 @@ class FirebaseServerRepository @Inject constructor(
     private suspend fun isPredefinedKitLearning(uuid: String) =
         suspendCoroutine<Boolean> { continuation ->
             learningKits.document(uuid).get().addCompleteListener {
-                continuation.resume(it.exists())
+                continuation.resume(it?.exists() ?: false)
             }
         }
 
@@ -253,10 +255,17 @@ class FirebaseServerRepository @Inject constructor(
             }
         }
 
-    private fun <T> Task<T>.addCompleteListener(onCompleted: (data: T) -> Unit) {
+    private fun <T> Task<T>.addCompleteListener(onCompleted: (data: T?) -> Unit) {
+        if (!networkHelper.isConnectionAvailable) {
+            onCompleted(null)
+            return
+        }
+
         addOnCompleteListener {
             if (!it.isSuccessful) {
                 exception?.printStackTrace()
+                onCompleted(null)
+                return@addOnCompleteListener
             }
 
             onCompleted(it.result)

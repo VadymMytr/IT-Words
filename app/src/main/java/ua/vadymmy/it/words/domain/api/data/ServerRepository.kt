@@ -10,7 +10,7 @@ interface ServerRepository : DataRepository {
     suspend fun addWord(word: Word)
     suspend fun addComplaintOn(word: Word)
     suspend fun getPredefinedKitsInfo(): List<WordKitInfo>
-    suspend fun getPredefinedKitDetails(uuid: String): WordKit
+    suspend fun getPredefinedKitDetails(uuid: String): WordKit?
     suspend fun isWordExists(wordParameters: WordParameters): Boolean
     suspend fun searchWords(searchParameters: SearchParameters): List<Word>
 }
