@@ -18,7 +18,7 @@ private const val KEY_CATEGORY_NAME = "kit_category_name"
 const val KEY_PREDEFINED_UUID = "learn_kit_predefined_uuid"
 
 private val WordKit.wordsUUIDs get() = words.map { it.uuid }.serialize()
-private fun WordKit.toWordsUUIDHashMap() = hashMapOf<String, Any>(KEY_WORDS_UUIDS to wordsUUIDs)
+fun WordKit.toWordsUUIDHashMap() = hashMapOf<String, Any>(KEY_WORDS_UUIDS to wordsUUIDs)
 
 fun WordKit.mapToHashMap() = hashMapOf<String, Any>(
     KEY_NAME to name,
@@ -47,5 +47,6 @@ fun DocumentSnapshot.mapToWordKit(words: List<Word>) = WordKit(
 
 fun DocumentSnapshot.mapToLearningWordKit(words: List<Word>) = LearningWordKit(
     wordKit = mapToWordKit(words),
-    predefinedKitUUID = findString(KEY_PREDEFINED_UUID)
+    predefinedKitUUID = findString(KEY_PREDEFINED_UUID),
+    isFullCopy = true
 )

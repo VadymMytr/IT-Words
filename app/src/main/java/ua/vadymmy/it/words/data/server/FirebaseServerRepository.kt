@@ -1,5 +1,6 @@
 package ua.vadymmy.it.words.data.server
 
+import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
@@ -81,22 +82,33 @@ class FirebaseServerRepository @Inject constructor(
     }
 
     override suspend fun updateWordProgress(word: Word) = suspendCoroutine<Unit> { continuation ->
-        learningWords.document(word.uuid).set(word.learningHashMap).addCompleteListener {
+        learningWords.document(word.uuid).update(word.learningHashMap).addCompleteListener {
             continuation.resume()
         }
     }
 
     override suspend fun addComplaintOn(word: Word) = suspendCoroutine<Unit> { continuation ->
-        words.document(word.uuid).set(word.complaintsHashMap).addCompleteListener {
+        words.document(word.uuid).update(word.complaintsHashMap).addCompleteListener {
             continuation.resume()
         }
     }
 
     override suspend fun addLearningWordKit(learningWordKit: LearningWordKit) =
         suspendCoroutine<Unit> { continuation ->
-            learningKits.document(learningWordKit.uuid)
-                .set(learningWordKit.mapToLearningHashMap())
-                .addCompleteListener { continuation.resume() }
+            val setBatch = db.batch()
+
+            learningWordKit.words.forEach {
+                setBatch.set(learningWords.document(it.uuid), it.learningHashMap)
+            }
+
+            setBatch.set(
+                learningKits.document(learningWordKit.uuid),
+                learningWordKit.mapToLearningHashMap()
+            )
+
+            setBatch.commit().addCompleteListener {
+                continuation.resume()
+            }
         }
 
     private suspend fun <T> getWordKits(
@@ -154,10 +166,22 @@ class FirebaseServerRepository @Inject constructor(
 
     override suspend fun updateLearningWordKit(learningWordKit: LearningWordKit) =
         suspendCoroutine<Unit> { continuation ->
-            learningKits.document(learningWordKit.uuid).set(learningWordKit.mapToLearningHashMap())
-                .addCompleteListener {
-                    continuation.resume()
-                }
+            val updateBatch = db.batch()
+
+            learningWordKit.words.forEach {
+                updateBatch.update(learningWords.document(it.uuid), it.learningHashMap)
+            }
+
+            Log.i("TAG", "trying to update kit ${learningWordKit.uuid}")
+
+            updateBatch.update(
+                learningKits.document(learningWordKit.uuid),
+                learningWordKit.mapToLearningHashMap()
+            )
+
+            updateBatch.commit().addCompleteListener {
+                continuation.resume()
+            }
         }
 
     override suspend fun isWordExists(wordParameters: WordParameters) =

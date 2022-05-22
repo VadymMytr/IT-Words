@@ -5,7 +5,7 @@ import ua.vadymmy.it.words.domain.entities.word.common.WordImage
 import ua.vadymmy.it.words.utils.newUUID
 
 open class WordKit(
-    val name: String,
+    var name: String,
     val image: WordImage,
     val category: WordKitCategory,
     val words: MutableList<Word>,

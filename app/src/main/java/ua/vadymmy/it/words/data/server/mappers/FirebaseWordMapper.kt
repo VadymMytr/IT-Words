@@ -26,8 +26,8 @@ fun Word.mapToHashMap(): HashMap<String, Any> = hashMapOf(
     KEY_IS_ADDED_BY_USER to isAddedByUser
 )
 
-val Word.complaintsHashMap get() = hashMapOf(KEY_COMPLAINTS_AMOUNT to complaintsAmount)
-val Word.learningHashMap get() = hashMapOf(KEY_WORD_PROGRESS to progress)
+val Word.complaintsHashMap get() = hashMapOf<String, Any>(KEY_COMPLAINTS_AMOUNT to complaintsAmount)
+val Word.learningHashMap get() = hashMapOf<String, Any>(KEY_WORD_PROGRESS to progress)
 
 val DocumentSnapshot.wordProgress get() = findInt(KEY_WORD_PROGRESS)
 fun DocumentSnapshot.mapToWord(): Word = Word(

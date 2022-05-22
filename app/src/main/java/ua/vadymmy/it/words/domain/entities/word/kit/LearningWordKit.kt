@@ -13,21 +13,22 @@ class LearningWordKit(
     uuid: String = newUUID,
     val predefinedKitUUID: String = NOT_PREDEFINED
 ) : WordKit(
-    name,
-    image,
-    category,
-    words,
-    uuid
+    name = name,
+    image = image,
+    category = category,
+    words = words,
+    uuid = uuid
 ) {
     val isFullyLearned get() = size == learnProgress
     val isPredefined get() = predefinedKitUUID.isNotEmpty()
     val learnProgress get() = words.count { it.wordProgress is Learned }
 
-    constructor(wordKit: WordKit, predefinedKitUUID: String) : this(
-        wordKit.name,
-        wordKit.image,
-        wordKit.category,
-        ArrayList(wordKit.words),
+    constructor(wordKit: WordKit, predefinedKitUUID: String, isFullCopy: Boolean = false) : this(
+        name = wordKit.name,
+        image = wordKit.image,
+        category = wordKit.category,
+        words = ArrayList(wordKit.words),
+        uuid = if(isFullCopy) wordKit.uuid else newUUID,
         predefinedKitUUID = predefinedKitUUID
     )
 
