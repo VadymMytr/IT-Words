@@ -2,7 +2,7 @@ package ua.vadymmy.it.words.data.local.entities.user
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import ua.vadymmy.it.words.domain.entities.user.User
+import ua.vadymmy.it.words.domain.models.user.User
 
 @Entity(tableName = "Users")
 data class UserEntity(

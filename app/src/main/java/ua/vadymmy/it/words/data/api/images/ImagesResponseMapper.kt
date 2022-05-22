@@ -1,6 +1,6 @@
 package ua.vadymmy.it.words.data.api.images
 
-import ua.vadymmy.it.words.domain.entities.word.common.WordImage
+import ua.vadymmy.it.words.domain.models.word.common.WordImage
 
 fun List<ImageApiEntry>.mapToWordImages(): List<WordImage> =
     if (isNotEmpty()) map { it.mapToWordImage() }

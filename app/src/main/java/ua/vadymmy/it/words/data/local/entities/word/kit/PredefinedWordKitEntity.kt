@@ -1,8 +1,8 @@
 package ua.vadymmy.it.words.data.local.entities.word.kit
 
 import androidx.room.Entity
-import ua.vadymmy.it.words.domain.entities.word.common.WordImage
-import ua.vadymmy.it.words.domain.entities.word.kit.WordKit
+import ua.vadymmy.it.words.domain.models.word.common.WordImage
+import ua.vadymmy.it.words.domain.models.word.kit.WordKit
 
 @Entity(tableName = "Predefined_Word_Kits")
 class PredefinedWordKitEntity(

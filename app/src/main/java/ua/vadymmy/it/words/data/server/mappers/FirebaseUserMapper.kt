@@ -2,7 +2,7 @@ package ua.vadymmy.it.words.data.server.mappers
 
 import androidx.core.net.toUri
 import com.google.firebase.firestore.DocumentSnapshot
-import ua.vadymmy.it.words.domain.entities.user.User
+import ua.vadymmy.it.words.domain.models.user.User
 import ua.vadymmy.it.words.utils.findInt
 import ua.vadymmy.it.words.utils.findString
 

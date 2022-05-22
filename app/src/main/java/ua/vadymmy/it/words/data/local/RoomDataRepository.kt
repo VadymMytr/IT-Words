@@ -13,10 +13,10 @@ import ua.vadymmy.it.words.data.local.entities.word.WordEntity
 import ua.vadymmy.it.words.data.local.entities.word.kit.LearningWordKitEntity
 import ua.vadymmy.it.words.data.local.entities.word.kit.PredefinedWordKitEntity
 import ua.vadymmy.it.words.domain.api.data.LocalRepository
-import ua.vadymmy.it.words.domain.entities.user.User
-import ua.vadymmy.it.words.domain.entities.word.common.Word
-import ua.vadymmy.it.words.domain.entities.word.kit.LearningWordKit
-import ua.vadymmy.it.words.domain.entities.word.kit.WordKit
+import ua.vadymmy.it.words.domain.models.user.User
+import ua.vadymmy.it.words.domain.models.word.common.Word
+import ua.vadymmy.it.words.domain.models.word.kit.LearningWordKit
+import ua.vadymmy.it.words.domain.models.word.kit.WordKit
 import ua.vadymmy.it.words.utils.AuthHelper
 
 class RoomDataRepository @Inject constructor(

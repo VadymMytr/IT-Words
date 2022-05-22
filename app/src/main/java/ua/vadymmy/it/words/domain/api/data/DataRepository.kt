@@ -1,8 +1,8 @@
 package ua.vadymmy.it.words.domain.api.data
 
-import ua.vadymmy.it.words.domain.entities.user.User
-import ua.vadymmy.it.words.domain.entities.word.common.Word
-import ua.vadymmy.it.words.domain.entities.word.kit.LearningWordKit
+import ua.vadymmy.it.words.domain.models.user.User
+import ua.vadymmy.it.words.domain.models.word.common.Word
+import ua.vadymmy.it.words.domain.models.word.kit.LearningWordKit
 
 interface DataRepository {
     suspend fun loginUser(user: User)

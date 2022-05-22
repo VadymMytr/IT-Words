@@ -1,9 +1,9 @@
 package ua.vadymmy.it.words.domain.api.data
 
-import ua.vadymmy.it.words.domain.entities.word.common.Word
-import ua.vadymmy.it.words.domain.entities.word.common.WordParameters
-import ua.vadymmy.it.words.domain.entities.word.kit.WordKit
-import ua.vadymmy.it.words.domain.entities.word.search.SearchParameters
+import ua.vadymmy.it.words.domain.models.word.common.Word
+import ua.vadymmy.it.words.domain.models.word.common.WordParameters
+import ua.vadymmy.it.words.domain.models.word.kit.WordKit
+import ua.vadymmy.it.words.domain.models.word.search.SearchParameters
 
 interface ServerRepository : DataRepository {
     suspend fun addWord(word: Word)

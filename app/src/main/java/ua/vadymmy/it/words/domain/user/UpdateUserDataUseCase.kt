@@ -5,7 +5,7 @@ import javax.inject.Inject
 import ua.vadymmy.it.words.domain.api.data.LocalRepository
 import ua.vadymmy.it.words.domain.api.data.ServerRepository
 import ua.vadymmy.it.words.domain.common.BackgroundUseCase
-import ua.vadymmy.it.words.domain.entities.user.User
+import ua.vadymmy.it.words.domain.models.user.User
 
 @Reusable
 class UpdateUserDataUseCase @Inject constructor(

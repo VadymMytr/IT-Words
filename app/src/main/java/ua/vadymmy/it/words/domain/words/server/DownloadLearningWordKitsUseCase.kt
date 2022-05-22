@@ -4,7 +4,7 @@ import dagger.Reusable
 import javax.inject.Inject
 import ua.vadymmy.it.words.domain.api.data.ServerRepository
 import ua.vadymmy.it.words.domain.common.BaseUseCase
-import ua.vadymmy.it.words.domain.entities.word.kit.LearningWordKit
+import ua.vadymmy.it.words.domain.models.word.kit.LearningWordKit
 
 @Reusable
 class DownloadLearningWordKitsUseCase @Inject constructor(

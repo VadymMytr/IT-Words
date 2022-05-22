@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">IT Words</string>
+
+    <!-- Auth Activity -->
+    <string name="auth_title">Вітаємо!\nУвійдіть у свій Google-аккаунт</string>
+    <string name="auth_log_in">Увійти</string>
+    <string name="failure_auth">Вхід провалено. Спробуйте, будь ласка, ще раз</string>
+    <!-- /Auth Activity -->
+
+    <string name="oauth_client_id">862495921780-q7he038d0dvi1vnj76cj6lmapi85s8ec.apps.googleusercontent.com</string>
+
 </resources>

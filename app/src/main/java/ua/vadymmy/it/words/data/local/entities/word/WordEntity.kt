@@ -3,8 +3,8 @@ package ua.vadymmy.it.words.data.local.entities.word
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import ua.vadymmy.it.words.domain.entities.word.common.Word
-import ua.vadymmy.it.words.domain.entities.word.common.WordImage
+import ua.vadymmy.it.words.domain.models.word.common.Word
+import ua.vadymmy.it.words.domain.models.word.common.WordImage
 
 @Entity(tableName = "Words")
 data class WordEntity(

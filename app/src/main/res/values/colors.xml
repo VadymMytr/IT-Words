@@ -7,4 +7,23 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#566FE1</color>
+    <color name="colorPrimaryDark">#191B36</color>
+    <color name="colorAccent">#5BE494</color>
+    <color name="colorPrimaryDisabled">#66566FE1</color>
+    <color name="colorPrimaryTranslucent">#0C566FE1</color>
+    <color name="colorPrimaryDarkPressed">#80191B36</color>
+    <color name="colorAccentPressed">#665BE494</color>
+
+    <!-- Button colors -->
+    <color name="colorTextBtn">@color/colorPrimary</color>
+    <color name="colorBtnPrimaryEndGradient">#738CEB</color>
+    <color name="colorBtnPrimaryDisabledStartGradient">#CFD6F7</color>
+    <color name="colorBtnPrimaryDisabledEndGradient">#DAD2F8</color>
+    <!-- /Button colors -->
+
+    <!-- Progress colors -->
+    <color name="colorProgressRunningStartGradient">#536CE0</color>
+    <color name="colorProgressRunningEndGradient">#8BA5F2</color>
+    <!-- /Progress colors -->
 </resources>

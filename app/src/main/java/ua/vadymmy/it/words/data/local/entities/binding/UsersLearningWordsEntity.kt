@@ -6,7 +6,7 @@ import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 import ua.vadymmy.it.words.data.local.entities.user.UserEntity
 import ua.vadymmy.it.words.data.local.entities.word.WordEntity
-import ua.vadymmy.it.words.domain.entities.word.common.Word
+import ua.vadymmy.it.words.domain.models.word.common.Word
 
 @Entity(
     tableName = "Users_Learning_Words",

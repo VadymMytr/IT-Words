@@ -4,7 +4,7 @@ import dagger.Reusable
 import javax.inject.Inject
 import ua.vadymmy.it.words.domain.api.data.LocalRepository
 import ua.vadymmy.it.words.domain.common.BackgroundUseCase
-import ua.vadymmy.it.words.domain.entities.word.kit.WordKit
+import ua.vadymmy.it.words.domain.models.word.kit.WordKit
 
 @Reusable
 class SavePredefinedWordKitUseCase @Inject constructor(

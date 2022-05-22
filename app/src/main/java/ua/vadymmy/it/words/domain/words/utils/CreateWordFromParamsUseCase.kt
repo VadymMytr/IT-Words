@@ -5,8 +5,8 @@ import javax.inject.Inject
 import ua.vadymmy.it.words.domain.api.images.GetWordImageByOriginalUseCase
 import ua.vadymmy.it.words.domain.api.transcription.GetWordTranscriptionUseCase
 import ua.vadymmy.it.words.domain.common.BaseUseCase
-import ua.vadymmy.it.words.domain.entities.word.common.Word
-import ua.vadymmy.it.words.domain.entities.word.common.WordParameters
+import ua.vadymmy.it.words.domain.models.word.common.Word
+import ua.vadymmy.it.words.domain.models.word.common.WordParameters
 
 @Reusable
 class CreateWordFromParamsUseCase @Inject constructor(

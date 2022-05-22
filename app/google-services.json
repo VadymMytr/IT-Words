@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "862495921780-dgadatgg6alaq6nv3c7havb3fs6m50m8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ua.vadymmy.it.words",
+            "certificate_hash": "5d9083e291c58a17b77a74dd00f1f444a104013a"
+          }
+        },
+        {
           "client_id": "862495921780-q7he038d0dvi1vnj76cj6lmapi85s8ec.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -5,8 +5,8 @@ import javax.inject.Inject
 import ua.vadymmy.it.words.domain.api.data.LocalRepository
 import ua.vadymmy.it.words.domain.api.data.ServerRepository
 import ua.vadymmy.it.words.domain.common.BackgroundUseCase
-import ua.vadymmy.it.words.domain.entities.word.common.Word
-import ua.vadymmy.it.words.domain.entities.word.kit.LearningWordKit
+import ua.vadymmy.it.words.domain.models.word.common.Word
+import ua.vadymmy.it.words.domain.models.word.kit.LearningWordKit
 import ua.vadymmy.it.words.domain.words.both.AddLearningWordToKitUseCase.AddWordQuery
 
 @Reusable

@@ -5,8 +5,8 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import ua.vadymmy.it.words.data.local.entities.word.WordEntity
 import ua.vadymmy.it.words.data.local.entities.word.kit.LearningWordKitEntity
-import ua.vadymmy.it.words.domain.entities.word.common.Word
-import ua.vadymmy.it.words.domain.entities.word.kit.LearningWordKit
+import ua.vadymmy.it.words.domain.models.word.common.Word
+import ua.vadymmy.it.words.domain.models.word.kit.LearningWordKit
 
 @Entity(
     tableName = "LearningKits_Words",

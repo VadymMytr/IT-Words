@@ -1,6 +1,6 @@
 package ua.vadymmy.it.words.ui.activities
 
-import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.lifecycle.LifecycleOwner
 import javax.inject.Inject
@@ -8,6 +8,7 @@ import ua.vadymmy.it.words.databinding.ActivityMainBinding
 import ua.vadymmy.it.words.di.AppComponent
 import ua.vadymmy.it.words.ui.common.BaseActivity
 import ua.vadymmy.it.words.ui.viewmodels.MainViewModel
+import ua.vadymmy.it.words.utils.startActivity
 
 class MainActivity : BaseActivity() {
 
@@ -15,8 +16,8 @@ class MainActivity : BaseActivity() {
     lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         viewModel.onResume()
     }
 
@@ -35,7 +36,14 @@ class MainActivity : BaseActivity() {
     }
 
     override fun observe(lifecycleOwner: LifecycleOwner) {
-
+        with(viewModel) {
+            navigateAuthLiveData.observe(lifecycleOwner) {
+                Log.i("TAG", "navigateAuthLiveData: ${it}")
+                if (it) {
+                    startActivity(AuthActivity::class.java)
+                }
+            }
+        }
     }
 
 }

@@ -1,8 +1,8 @@
 package ua.vadymmy.it.words.data.server.mappers
 
 import com.google.firebase.firestore.DocumentSnapshot
-import ua.vadymmy.it.words.domain.entities.word.common.Word
-import ua.vadymmy.it.words.domain.entities.word.common.WordImage
+import ua.vadymmy.it.words.domain.models.word.common.Word
+import ua.vadymmy.it.words.domain.models.word.common.WordImage
 import ua.vadymmy.it.words.utils.findBoolean
 import ua.vadymmy.it.words.utils.findInt
 import ua.vadymmy.it.words.utils.findString

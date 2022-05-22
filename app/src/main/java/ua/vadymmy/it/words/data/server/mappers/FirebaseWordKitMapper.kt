@@ -1,11 +1,11 @@
 package ua.vadymmy.it.words.data.server.mappers
 
 import com.google.firebase.firestore.DocumentSnapshot
-import ua.vadymmy.it.words.domain.entities.word.common.Word
-import ua.vadymmy.it.words.domain.entities.word.common.WordImage
-import ua.vadymmy.it.words.domain.entities.word.kit.LearningWordKit
-import ua.vadymmy.it.words.domain.entities.word.kit.WordKit
-import ua.vadymmy.it.words.domain.entities.word.kit.WordKitCategory
+import ua.vadymmy.it.words.domain.models.word.common.Word
+import ua.vadymmy.it.words.domain.models.word.common.WordImage
+import ua.vadymmy.it.words.domain.models.word.kit.LearningWordKit
+import ua.vadymmy.it.words.domain.models.word.kit.WordKit
+import ua.vadymmy.it.words.domain.models.word.kit.WordKitCategory
 import ua.vadymmy.it.words.utils.findString
 import ua.vadymmy.it.words.utils.findStringList
 import ua.vadymmy.it.words.utils.serialize
