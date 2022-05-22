@@ -9,14 +9,14 @@ import ua.vadymmy.it.words.domain.entities.word.common.WordImage
 @Entity(tableName = "Words")
 data class WordEntity(
     @PrimaryKey
-    val word_uuid: String,
-    val word_original: String,
-    val word_translate: String,
-    val word_transcription: String,
+    var word_uuid: String,
+    var word_original: String,
+    var word_translate: String,
+    var word_transcription: String,
     @Embedded(prefix = "word_image_")
-    val word_image: WordImage,
-    val word_complaints_amount: Int,
-    val word_is_added_by_user: Boolean
+    var word_image: WordImage,
+    var word_complaints_amount: Int,
+    var word_is_added_by_user: Boolean
 ) {
 
     constructor(word: Word) : this(

@@ -9,12 +9,14 @@ import ua.vadymmy.it.words.domain.entities.word.kit.WordKit
 @Entity(tableName = "Word_Kits")
 open class WordKitEntity(
     @PrimaryKey
-    val word_kit_uuid: String,
-    val word_kit_name: String,
-    val word_kit_category_name: String,
+    var word_kit_uuid: String,
+    var word_kit_name: String,
+    var word_kit_category_name: String,
     @Embedded(prefix = "word_kit_image_")
-    val word_kit_image: WordImage
+    var word_kit_image: WordImage
 ) {
+
+    constructor() : this("", "", "", WordImage.empty)
 
     constructor(wordKit: WordKit) : this(
         wordKit.uuid,

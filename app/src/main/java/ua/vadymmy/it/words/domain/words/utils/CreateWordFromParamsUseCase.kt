@@ -1,4 +1,4 @@
-package ua.vadymmy.it.words.domain.words.creations
+package ua.vadymmy.it.words.domain.words.utils
 
 import dagger.Reusable
 import javax.inject.Inject

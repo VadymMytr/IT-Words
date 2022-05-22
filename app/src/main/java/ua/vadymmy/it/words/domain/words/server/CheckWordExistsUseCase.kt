@@ -1,4 +1,4 @@
-package ua.vadymmy.it.words.domain.words.other
+package ua.vadymmy.it.words.domain.words.server
 
 import dagger.Reusable
 import javax.inject.Inject

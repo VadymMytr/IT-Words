@@ -1,4 +1,4 @@
-package ua.vadymmy.it.words.domain.words.inserts
+package ua.vadymmy.it.words.domain.words.server
 
 import dagger.Reusable
 import javax.inject.Inject
@@ -7,7 +7,7 @@ import ua.vadymmy.it.words.domain.common.BaseUseCase
 import ua.vadymmy.it.words.domain.entities.word.common.Word
 
 @Reusable
-class AddWordToDictionaryUseCase @Inject constructor(
+class UploadWordToDictionaryUseCase @Inject constructor(
     private val serverRepository: ServerRepository
 ) : BaseUseCase<Word, Unit>() {
 

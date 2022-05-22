@@ -1,6 +1,5 @@
 package ua.vadymmy.it.words.data.server
 
-import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
@@ -49,7 +48,7 @@ class FirebaseServerRepository @Inject constructor(
     private val words get() = db.collection(WORDS_COLLECTION)
     private val predefinedKits get() = db.collection(WORDS_KITS_COLLECTION)
 
-    private val currentUserDoc get() = users.document(authHelper.currentUser.uid)
+    private val currentUserDoc get() = users.document(authHelper.currentUserUid)
     private val learningWords get() = currentUserDoc.collection(LEARNING_WORDS_COLLECTION)
     private val learningKits get() = currentUserDoc.collection(LEARNING_KITS_COLLECTION)
 
@@ -77,12 +76,6 @@ class FirebaseServerRepository @Inject constructor(
 
     override suspend fun addWord(word: Word) = suspendCoroutine<Unit> { continuation ->
         words.document(word.uuid).set(word.mapToHashMap()).addCompleteListener {
-            continuation.resume()
-        }
-    }
-
-    override suspend fun updateWordProgress(word: Word) = suspendCoroutine<Unit> { continuation ->
-        learningWords.document(word.uuid).update(word.learningHashMap).addCompleteListener {
             continuation.resume()
         }
     }
@@ -171,8 +164,6 @@ class FirebaseServerRepository @Inject constructor(
             learningWordKit.words.forEach {
                 updateBatch.update(learningWords.document(it.uuid), it.learningHashMap)
             }
-
-            Log.i("TAG", "trying to update kit ${learningWordKit.uuid}")
 
             updateBatch.update(
                 learningKits.document(learningWordKit.uuid),

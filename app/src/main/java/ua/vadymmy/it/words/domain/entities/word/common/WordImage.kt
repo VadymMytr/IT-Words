@@ -5,7 +5,7 @@ import android.graphics.Color
 data class WordImage constructor(val url: String, val colorHex: String) {
 
     val color get() = Color.parseColor(colorHex)
-    val isNotEmpty = url.isNotEmpty()
+    var isNotEmpty = url.isNotEmpty()
 
     companion object {
         private const val EMPTY_URL = ""

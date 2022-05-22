@@ -7,7 +7,7 @@ import ua.vadymmy.it.words.domain.entities.word.search.SearchParameters
 
 interface ServerRepository : DataRepository {
     suspend fun addWord(word: Word)
-    suspend fun addComplaintOn(word: Word)
+    suspend fun getPredefinedWordKits(): List<WordKit>
     suspend fun isWordExists(wordParameters: WordParameters): Boolean
     suspend fun searchWords(searchParameters: SearchParameters): List<Word>
 }
