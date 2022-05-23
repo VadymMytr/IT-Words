@@ -9,7 +9,7 @@ data class User(
     val email: String,
     val photoUrl: Uri,
     val name: String = EMPTY_NAME,
-    val learnProgress: Int = NO_PROGRESS
+    var learnProgress: Int = NO_PROGRESS
 ) {
 
     val level: UserLevel

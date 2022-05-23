@@ -18,6 +18,7 @@ import ua.vadymmy.it.words.data.server.mappers.learningHashMap
 import ua.vadymmy.it.words.data.server.mappers.mapToHashMap
 import ua.vadymmy.it.words.data.server.mappers.mapToLearningHashMap
 import ua.vadymmy.it.words.data.server.mappers.mapToLearningWordKit
+import ua.vadymmy.it.words.data.server.mappers.mapToUser
 import ua.vadymmy.it.words.data.server.mappers.mapToWord
 import ua.vadymmy.it.words.data.server.mappers.mapToWordKit
 import ua.vadymmy.it.words.data.server.mappers.wordProgress
@@ -103,6 +104,12 @@ class FirebaseServerRepository @Inject constructor(
                 continuation.resume()
             }
         }
+
+    override suspend fun getUser(uid: String): User? = suspendCoroutine { continuation ->
+        users.document(uid).get().addCompleteListener {
+            continuation.resume(it?.mapToUser())
+        }
+    }
 
     private suspend fun <T> getWordKits(
         collectionReference: CollectionReference,

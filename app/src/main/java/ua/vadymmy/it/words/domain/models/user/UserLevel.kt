@@ -3,27 +3,26 @@ package ua.vadymmy.it.words.domain.models.user
 import androidx.annotation.StringRes
 import ua.vadymmy.it.words.R
 
-//TODO FILL TITLES
-enum class UserLevel(@StringRes val titleRes: Int, private val rangeEnd: Int) {
-    BEGINNER(R.string.app_name, 50),
-    EXPLORER(R.string.app_name, 150),
-    ENTHUSIAST(R.string.app_name, 300),
-    HUNTER(R.string.app_name, 700),
-    KING(R.string.app_name, 1000),
-    EMPEROR(R.string.app_name, 1500);
+enum class UserLevel(@StringRes val titleRes: Int, val levelMax: Int) {
+    BEGINNER(R.string.user_level_beginner, 50),
+    EXPLORER(R.string.user_level_explorer, 150),
+    ENTHUSIAST(R.string.user_level_enthusiast, 300),
+    HUNTER(R.string.user_level_hunter, 700),
+    KING(R.string.user_level_king, 1000),
+    EMPEROR(R.string.user_level_emperor, 1500);
 
     companion object {
         private const val FIRST_ITEM_ORDINAL = 0
 
         fun fromProgress(progress: Int) = when {
-            progress > EMPEROR.rangeEnd -> EMPEROR
+            progress > EMPEROR.levelMax -> EMPEROR
             progress < BEGINNER.rangeStart -> BEGINNER
             else -> values().find { it.wordsRange.contains(progress) } ?: BEGINNER
         }
     }
 
-    private val wordsRange get() = IntRange(rangeStart, rangeEnd)
+    private val wordsRange get() = IntRange(rangeStart, levelMax)
     private val isFirstItem get() = ordinal == FIRST_ITEM_ORDINAL
     private val previousLevel get() = values()[ordinal - 1]
-    private val rangeStart: Int get() = if (isFirstItem) FIRST_ITEM_ORDINAL else previousLevel.rangeEnd.inc()
+    private val rangeStart: Int get() = if (isFirstItem) FIRST_ITEM_ORDINAL else previousLevel.levelMax.inc()
 }

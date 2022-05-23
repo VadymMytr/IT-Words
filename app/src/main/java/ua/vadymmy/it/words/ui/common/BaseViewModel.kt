@@ -8,9 +8,12 @@ import ua.vadymmy.it.words.utils.emit
 open class BaseViewModel : ViewModel() {
     val onSuccessLiveData = MutableLiveData<Boolean>()
     val onFailureLiveData = MutableLiveData<Boolean>()
+    val showLoaderLiveData = MutableLiveData(false)
+    val hideLoaderLiveData = MutableLiveData(false)
 
     @CallSuper
-    open fun onResume() {}
+    open fun onResume() {
+    }
 
     protected fun onSuccess() {
         onSuccessLiveData.emit()
@@ -18,5 +21,14 @@ open class BaseViewModel : ViewModel() {
 
     protected fun onFailure() {
         onFailureLiveData.emit()
+    }
+
+    protected fun onLoadingStart() = showLoader(isLoading = true)
+    
+    protected fun onLoadingEnd() = showLoader(isLoading = false)
+
+    private fun showLoader(isLoading: Boolean) {
+        showLoaderLiveData.value = isLoading
+        hideLoaderLiveData.value = !isLoading
     }
 }

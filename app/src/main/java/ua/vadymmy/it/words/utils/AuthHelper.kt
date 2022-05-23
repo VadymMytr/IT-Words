@@ -55,6 +55,7 @@ class AuthHelper @Inject constructor(
         if (!isUserSigned) return
         auth.signOut()
         sharedStorageHelper.currentUserUid = NOT_AUTHORIZED_USER_UID
+        onLaunchAuthScreen()
     }
 
     suspend fun getTokenFromRequestResult(data: Intent?): String =

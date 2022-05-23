@@ -1,0 +1,37 @@
+package ua.vadymmy.it.words.ui.viewmodels
+
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import javax.inject.Inject
+import kotlinx.coroutines.launch
+import ua.vadymmy.it.words.domain.models.user.User
+import ua.vadymmy.it.words.domain.user.GetCurrentUserDetailsUseCase
+import ua.vadymmy.it.words.domain.user.LogoutUserUseCase
+import ua.vadymmy.it.words.ui.common.BaseViewModel
+import ua.vadymmy.it.words.utils.emit
+
+class MainFragmentViewModel @Inject constructor(
+    private val getCurrentUserDetailsUseCase: GetCurrentUserDetailsUseCase,
+    private val logoutUserUseCase: LogoutUserUseCase
+) : BaseViewModel() {
+
+    val currentUserLiveData = MutableLiveData<User>()
+    val navigateAuthLiveData = MutableLiveData(false)
+
+    override fun onResume() {
+        super.onResume()
+        onLoadingStart()
+        viewModelScope.launch {
+            currentUserLiveData.value = getCurrentUserDetailsUseCase(Unit)
+            onLoadingEnd()
+        }
+    }
+
+    fun onLogoutClick() {
+        viewModelScope.launch {
+            logoutUserUseCase {
+                navigateAuthLiveData.emit()
+            }
+        }
+    }
+}

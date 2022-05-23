@@ -3,15 +3,19 @@ package ua.vadymmy.it.words.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.annotation.StringRes
 import androidx.core.os.bundleOf
 import androidx.lifecycle.MutableLiveData
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.gson.Gson
 import java.util.UUID
+import ua.vadymmy.it.words.R
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 
@@ -67,4 +71,10 @@ fun <T> Activity.startActivity(
 ) {
     startActivity(Intent(this, activityClass).putExtras(intentData))
     if (isFinishRequired) finish()
+}
+
+fun ImageView.loadFrom(url: Uri) {
+    Glide.with(context).load(url).centerCrop()
+        .placeholder(R.drawable.ic_no_image)
+        .into(this)
 }

@@ -7,6 +7,15 @@
     <string name="failure_auth">Вхід провалено. Спробуйте, будь ласка, ще раз</string>
     <!-- /Auth Activity -->
 
+    <!-- User Level -->
+    <string name="user_level_beginner">Початківець</string>
+    <string name="user_level_explorer">Дослідник</string>
+    <string name="user_level_enthusiast">Ентузіаст</string>
+    <string name="user_level_hunter">Мисливець</string>
+    <string name="user_level_king">Король</string>
+    <string name="user_level_emperor">Імператор</string>
+    <!-- /User Level -->
+
     <!-- Sync Activity -->
     <string name="syncing_kits">Завантаження наборів…</string>
     <string name="syncing_progress">Синхронізація вашого прогресу…</string>
