@@ -17,7 +17,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     @StringRes
     protected open val titleId: Int = DEFAULT_TITLE
-    protected open val titleTextView: TextView? = null
+    open val titleTextView: TextView? = null
 
     protected abstract fun inflateBinding(layoutInflater: LayoutInflater)
     protected abstract fun injectActivity(injector: AppComponent)

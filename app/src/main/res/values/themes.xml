@@ -10,13 +10,13 @@
         <item name="colorSecondaryVariant">@color/colorAccentPressed</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondary</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
     </style>
 
     <!-- Buttons -->
     <style name="BtnStyle" parent="Widget.AppCompat.Button">
-        <item name="android:layout_height">54dp</item>
+        <item name="android:layout_height">60dp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@drawable/selector_text_white</item>
         <item name="android:textSize">20sp</item>
@@ -31,5 +31,27 @@
     <style name="BtnStyle.AppPrimary.Green" parent="BtnStyle">
         <item name="android:background">@drawable/selector_btn_green</item>
     </style>
+
+    <style name="BtnStyle.AppPrimary.Outline" parent="BtnStyle">
+        <item name="android:background">@drawable/selector_btn_outline</item>
+        <item name="android:textColor">@drawable/selector_text_primary</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:padding">8sp</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">18sp</item>
+    </style>
     <!-- /Buttons -->
+
+    <!-- Images -->
+    <style name="ImgStyle.Circle" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+    <!-- /Images -->
+
+    <!-- Tab Layout -->
+    <style name="TabStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="textAllCaps">false</item>
+    </style>
+    <!-- /Tab Layout -->
 </resources>

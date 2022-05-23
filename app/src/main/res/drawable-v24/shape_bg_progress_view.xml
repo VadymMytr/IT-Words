@@ -4,4 +4,5 @@
         android:angle="45"
         android:endColor="@color/colorProgressRunningEndGradient"
         android:startColor="@color/colorProgressRunningStartGradient" />
+    <corners android:radius="10dp" />
 </shape>

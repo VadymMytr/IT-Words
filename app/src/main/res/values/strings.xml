@@ -14,6 +14,20 @@
     <string name="syncing_next">Далі</string>
     <!-- /Sync Activity -->
 
+    <!-- Main Activity -->
+    <string name="main_tab_home">Головна</string>
+    <string name="main_tab_my_kits">Мої набори</string>
+    <string name="main_tab_all_kits">Усі набори</string>
+    <!-- /Main Activity -->
+
+    <!-- Main Fragment -->
+    <string name="main_user_level_placeholder">Вивчено %d/%d слів</string>
+    <string name="main_zero">0</string>
+    <string name="main_words_learning">Слів на вивченні</string>
+    <string name="main_learn_button">Вчити</string>
+    <string name="main_my_kits_button">Переглянути мої набори</string>
+    <!-- /Main Fragment -->
+
     <string name="oauth_client_id">862495921780-q7he038d0dvi1vnj76cj6lmapi85s8ec.apps.googleusercontent.com</string>
 
 </resources>

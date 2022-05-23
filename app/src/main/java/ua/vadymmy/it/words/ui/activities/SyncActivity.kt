@@ -7,6 +7,7 @@ import javax.inject.Inject
 import ua.vadymmy.it.words.R
 import ua.vadymmy.it.words.databinding.ActivitySyncBinding
 import ua.vadymmy.it.words.di.AppComponent
+import ua.vadymmy.it.words.ui.activities.main.MainActivity
 import ua.vadymmy.it.words.ui.common.BaseActivity
 import ua.vadymmy.it.words.ui.viewmodels.sync.SyncStatus.Synced
 import ua.vadymmy.it.words.ui.viewmodels.sync.SyncViewModel
