@@ -7,6 +7,13 @@
     <string name="failure_auth">Вхід провалено. Спробуйте, будь ласка, ще раз</string>
     <!-- /Auth Activity -->
 
+    <!-- Sync Activity -->
+    <string name="syncing_kits">Завантаження наборів…</string>
+    <string name="syncing_progress">Синхронізація вашого прогресу…</string>
+    <string name="syncing_end">Синхронізацію завершено</string>
+    <string name="syncing_next">Далі</string>
+    <!-- /Sync Activity -->
+
     <string name="oauth_client_id">862495921780-q7he038d0dvi1vnj76cj6lmapi85s8ec.apps.googleusercontent.com</string>
 
 </resources>

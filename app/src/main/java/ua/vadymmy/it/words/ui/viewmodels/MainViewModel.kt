@@ -13,6 +13,7 @@ class MainViewModel @Inject constructor(
     val navigateAuthLiveData = MutableLiveData(false)
 
     override fun onResume() {
+        super.onResume()
         if (!authHelper.isUserSignedAndValid) {
             navigateAuthLiveData.emit()
         }

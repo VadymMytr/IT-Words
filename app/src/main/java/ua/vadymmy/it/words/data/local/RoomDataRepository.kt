@@ -39,6 +39,8 @@ class RoomDataRepository @Inject constructor(
         userDao.updateUser(UserEntity(user))
     }
 
+    override suspend fun getCurrentUserDetails(): User = User(userDao.getUserDetails(userId))
+
     override suspend fun addPredefinedWordKit(wordKit: WordKit) {
         with(wordsDao) {
             if (!isKitExists(wordKit.uuid)) insertPredefinedWordKit(PredefinedWordKitEntity(wordKit))

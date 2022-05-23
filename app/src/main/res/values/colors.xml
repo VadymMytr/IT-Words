@@ -13,11 +13,15 @@
     <color name="colorPrimaryDisabled">#66566FE1</color>
     <color name="colorPrimaryTranslucent">#0C566FE1</color>
     <color name="colorPrimaryDarkPressed">#80191B36</color>
+    <color name="colorAccentStartGradient">#33C092</color>
+    <color name="colorAccentEndGradient">#30AF79</color>
     <color name="colorAccentPressed">#665BE494</color>
 
     <!-- Button colors -->
     <color name="colorTextBtn">@color/colorPrimary</color>
     <color name="colorBtnPrimaryEndGradient">#738CEB</color>
+    <color name="colorBtnDisabledStartGradient">#3331B784</color>
+    <color name="colorBtnDisabledEndGradient">#3330AF79</color>
     <color name="colorBtnPrimaryDisabledStartGradient">#CFD6F7</color>
     <color name="colorBtnPrimaryDisabledEndGradient">#DAD2F8</color>
     <!-- /Button colors -->
