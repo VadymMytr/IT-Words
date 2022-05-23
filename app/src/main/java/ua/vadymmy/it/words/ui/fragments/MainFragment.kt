@@ -10,6 +10,7 @@ import ua.vadymmy.it.words.databinding.FragmentMainBinding
 import ua.vadymmy.it.words.di.AppComponent
 import ua.vadymmy.it.words.domain.models.user.User
 import ua.vadymmy.it.words.ui.activities.AuthActivity
+import ua.vadymmy.it.words.ui.activities.UserLevelsActivity
 import ua.vadymmy.it.words.ui.common.BaseFragment
 import ua.vadymmy.it.words.ui.viewmodels.MainFragmentViewModel
 import ua.vadymmy.it.words.utils.loadFrom
@@ -17,8 +18,7 @@ import ua.vadymmy.it.words.utils.startActivity
 
 class MainFragment : BaseFragment() {
 
-    override val titleId: Int
-        get() = R.string.main_tab_home
+    override val titleId: Int get() = R.string.main_tab_home
 
     @Inject
     lateinit var viewModel: MainFragmentViewModel
@@ -28,6 +28,10 @@ class MainFragment : BaseFragment() {
         with(binding) {
             mainLogoutButton.setOnClickListener {
                 viewModel.onLogoutClick()
+            }
+
+            mainUserLevelsDetailsButton.setOnClickListener {
+                viewModel.onUserLevelsDetailsClick()
             }
         }
     }
@@ -61,10 +65,14 @@ class MainFragment : BaseFragment() {
             }
 
             navigateAuthLiveData.observe(lifecycleOwner) {
-                if (it) requireActivity().startActivity(
+                if (it) startActivity(
                     AuthActivity::class.java,
                     isFinishRequired = true
                 )
+            }
+
+            navigateUserLevelsLiveData.observe(lifecycleOwner) {
+                if(it) startActivity(UserLevelsActivity::class.java)
             }
         }
     }
@@ -80,7 +88,7 @@ class MainFragment : BaseFragment() {
             val maxProgress = userLevel.levelMax
             mainUserLevelNameText.setText(userLevel.titleRes)
             mainUserLevelProgress.max = maxProgress
-            mainUserLevelProgress.progress = currentProgress
+            mainUserLevelProgress.setProgress(currentProgress, true)
             mainUserLevelProgressText.text = getString(
                 R.string.main_user_level_placeholder,
                 currentProgress,

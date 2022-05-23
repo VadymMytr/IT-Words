@@ -1,6 +1,7 @@
 package ua.vadymmy.it.words.ui.activities.main
 
 import android.view.LayoutInflater
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.tabs.TabLayoutMediator
@@ -17,6 +18,10 @@ class MainActivity : BaseActivity() {
     lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
     private lateinit var navigationAdapter: MainPagerAdapter
+
+    override val titleTextView: TextView? by lazy {
+        binding.mainToolbarTitle
+    }
 
     override fun inflateBinding(layoutInflater: LayoutInflater) {
         binding = ActivityMainBinding.inflate(layoutInflater).also {
@@ -44,16 +49,14 @@ class MainActivity : BaseActivity() {
     }
 
     fun showLoading() {
-        with(binding.mainLoader) {
-            isVisible = true
-            show()
+        with(binding) {
+            mainLoader.isVisible = true
         }
     }
 
     fun hideLoading() {
-        with(binding.mainLoader) {
-            hide()
-            isVisible = false
+        with(binding) {
+            mainLoader.isVisible = false
         }
     }
 }

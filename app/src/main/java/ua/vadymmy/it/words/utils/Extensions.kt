@@ -10,6 +10,7 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.annotation.StringRes
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.DocumentSnapshot
@@ -71,6 +72,14 @@ fun <T> Activity.startActivity(
 ) {
     startActivity(Intent(this, activityClass).putExtras(intentData))
     if (isFinishRequired) finish()
+}
+
+fun <T> Fragment.startActivity(
+    activityClass: Class<T>,
+    isFinishRequired: Boolean = false,
+    intentData: Bundle = bundleOf()
+) {
+    requireActivity().startActivity(activityClass, isFinishRequired, intentData)
 }
 
 fun ImageView.loadFrom(url: Uri) {

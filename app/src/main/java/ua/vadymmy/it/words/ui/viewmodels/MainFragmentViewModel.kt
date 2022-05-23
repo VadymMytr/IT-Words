@@ -17,13 +17,12 @@ class MainFragmentViewModel @Inject constructor(
 
     val currentUserLiveData = MutableLiveData<User>()
     val navigateAuthLiveData = MutableLiveData(false)
+    val navigateUserLevelsLiveData = MutableLiveData(false)
 
     override fun onResume() {
         super.onResume()
-        onLoadingStart()
         viewModelScope.launch {
             currentUserLiveData.value = getCurrentUserDetailsUseCase(Unit)
-            onLoadingEnd()
         }
     }
 
@@ -33,5 +32,9 @@ class MainFragmentViewModel @Inject constructor(
                 navigateAuthLiveData.emit()
             }
         }
+    }
+
+    fun onUserLevelsDetailsClick() {
+        navigateUserLevelsLiveData.emit()
     }
 }
