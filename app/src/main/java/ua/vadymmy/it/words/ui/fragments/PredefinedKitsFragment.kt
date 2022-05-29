@@ -1,5 +1,6 @@
 package ua.vadymmy.it.words.ui.fragments
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,6 +55,7 @@ class PredefinedKitsFragment : BaseFragment() {
             }
 
             navigatePredefinedKitDetailsLiveData.observe(lifecycleOwner) { kit ->
+                Log.i("TAG", "navigatePredefinedKitDetailsLiveData: $kit")
                 kit?.let {
                     startActivity(
                         KitDetailsActivity::class.java,

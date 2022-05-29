@@ -8,7 +8,7 @@ import ua.vadymmy.it.words.domain.common.BackgroundUseCase
 import ua.vadymmy.it.words.domain.models.word.kit.LearningWordKit
 
 @Reusable
-class SaveLearningWordKitUseCase @Inject constructor(
+class AddLearningWordKitUseCase @Inject constructor(
     private val localRepository: LocalRepository,
     private val serverRepository: ServerRepository
 ) : BackgroundUseCase<LearningWordKit, Unit>() {

@@ -6,6 +6,7 @@ import ua.vadymmy.it.words.domain.models.word.kit.LearningWordKit
 import ua.vadymmy.it.words.domain.words.both.DeleteLearningWordKit
 import ua.vadymmy.it.words.domain.words.local.GetAllLearningKitsUseCase
 import ua.vadymmy.it.words.ui.common.BaseViewModel
+import ua.vadymmy.it.words.utils.REMOVE_AT_DEFAULT
 import ua.vadymmy.it.words.utils.call
 import ua.vadymmy.it.words.utils.emit
 
@@ -38,8 +39,4 @@ class LearningKitsViewModel @Inject constructor(
     }
 
     fun onCreateKitClick() = showNewKitDialogLiveData.emit()
-
-    companion object {
-        const val REMOVE_AT_DEFAULT = -1
-    }
 }

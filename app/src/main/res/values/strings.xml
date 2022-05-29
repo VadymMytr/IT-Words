@@ -48,13 +48,25 @@
     <!-- /Word Kits Categories -->
 
     <!-- Word Kits Previews -->
-    <string name="kit_preview_progress_placeholder">%d/%d</string>
+    <string name="kit_progress_placeholder">%d/%d</string>
     <!-- /Word Kits Previews -->
 
     <!-- Learning Kits Activity -->
     <string name="kits_learning_not_learning">Не вивчається жоден набір 🥺\nДодайте набір із готових,\nабо ж створіть свій 👇</string>
     <string name="kits_create_btn">Створити набір</string>
     <!-- /Learning Kits Activity -->
+
+    <!-- Kit Details Activity -->
+    <string name="kit_details_no_words">Ще немає жодного слова 😉\n Додайте свої слова 👇</string>
+    <string name="kit_details_size_placeholder">%d слів</string>
+    <string name="kit_details_add_word">+ Додати слово</string>
+    <string name="kit_details_learn_btn">Вчити слова</string>
+    <string name="kit_details_search_btn">Знайти слова</string>
+    <!-- /Kit Details Activity -->
+
+    <!-- Word Item -->
+    <string name="word_item_added_by_user_placeholder">Додано користувачем. Скарг: %d</string>
+    <!-- /Word Item -->
 
     <string name="oauth_client_id">862495921780-q7he038d0dvi1vnj76cj6lmapi85s8ec.apps.googleusercontent.com</string>
 

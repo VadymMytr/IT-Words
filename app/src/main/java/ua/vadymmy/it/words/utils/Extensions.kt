@@ -35,8 +35,8 @@ val gson get() = Gson()
 //live data ext
 fun <T> MutableLiveData<T>.call(newValue: T) {
     val oldValue = this.value
-    postValue(newValue)
-    postValue(oldValue)
+    value = newValue
+    value = oldValue
 }
 
 fun MutableLiveData<Boolean>.emit() {
@@ -110,3 +110,6 @@ fun ImageView.loadFrom(wordImage: WordImage) {
 
 //tts ext
 fun TextToSpeech.speak(word: Word) = speak(word.original, TextToSpeech.QUEUE_FLUSH, null, null)
+
+//constants
+const val REMOVE_AT_DEFAULT = -1

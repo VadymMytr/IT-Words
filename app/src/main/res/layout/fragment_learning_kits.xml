@@ -53,11 +53,11 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/learning_kits_create"
-            style="@style/BtnStyle.AppPrimary.Outline"
+            style="@style/BtnStyle.Outline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp"
+            android:layout_marginVertical="12dp"
             android:layout_weight="1"
             android:text="@string/kits_create_btn"
             app:layout_constraintEnd_toEndOf="parent"

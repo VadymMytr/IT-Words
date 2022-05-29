@@ -98,13 +98,13 @@
                     android:fontFamily="@font/roboto_bold"
                     android:gravity="center"
                     android:lines="1"
-                    android:text="@string/kit_preview_progress_placeholder"
+                    android:text="@string/kit_progress_placeholder"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="12sp" />
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/learning_kit_preview_done"
+                android:id="@+id/learning_kit_preview_done_image"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/ic_done"
@@ -112,7 +112,7 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/learning_kit_preview_delete"
+            android:id="@+id/learning_kit_preview_delete_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

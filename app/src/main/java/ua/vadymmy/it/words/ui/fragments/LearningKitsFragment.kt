@@ -14,7 +14,7 @@ import ua.vadymmy.it.words.ui.activities.KitDetailsActivity
 import ua.vadymmy.it.words.ui.adapters.recyclers.LearningKitsPreviewsAdapter
 import ua.vadymmy.it.words.ui.common.BaseFragment
 import ua.vadymmy.it.words.ui.viewmodels.LearningKitsViewModel
-import ua.vadymmy.it.words.ui.viewmodels.LearningKitsViewModel.Companion.REMOVE_AT_DEFAULT
+import ua.vadymmy.it.words.utils.REMOVE_AT_DEFAULT
 import ua.vadymmy.it.words.utils.startActivity
 
 class LearningKitsFragment : BaseFragment() {

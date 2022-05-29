@@ -31,4 +31,8 @@
     <color name="colorProgressRunningStartGradient">#536CE0</color>
     <color name="colorProgressRunningEndGradient">#8BA5F2</color>
     <!-- /Progress colors -->
+
+    <!-- Image colors -->
+    <color name="colorTranslucentImage">#40000000</color>
+    <!-- /Image colors -->
 </resources>

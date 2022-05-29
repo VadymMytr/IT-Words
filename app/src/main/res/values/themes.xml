@@ -16,7 +16,7 @@
 
     <!-- Buttons -->
     <style name="BtnStyle" parent="Widget.AppCompat.Button">
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_height">64dp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@drawable/selector_text_white</item>
         <item name="android:textSize">20sp</item>
@@ -32,13 +32,22 @@
         <item name="android:background">@drawable/selector_btn_green</item>
     </style>
 
-    <style name="BtnStyle.AppPrimary.Outline" parent="BtnStyle">
-        <item name="android:background">@drawable/selector_btn_outline</item>
+    <style name="BtnStyle.Outline" parent="BtnStyle">
+        <item name="android:background">@drawable/selector_btn_outline_primary</item>
         <item name="android:textColor">@drawable/selector_text_primary</item>
         <item name="android:layout_height">64dp</item>
         <item name="android:padding">8sp</item>
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="BtnStyle.Outline.White.Small" parent="BtnStyle">
+        <item name="android:background">@drawable/selector_btn_outline_white</item>
+        <item name="android:textColor">@drawable/selector_text_white</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:paddingVertical">4sp</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">14sp</item>
     </style>
     <!-- /Buttons -->
 

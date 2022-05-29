@@ -30,12 +30,12 @@ class LearningKitsPreviewsAdapter(
         learningKitPreviewCategory.setText(element.category.titleRes)
 
         val isLearned = element.isFullyLearned
-        learningKitPreviewDone.isVisible = isLearned
+        learningKitPreviewDoneImage.isVisible = isLearned
         learningKitPreviewProgressLayout.isVisible = !isLearned
         if (!isLearned) {
             learningKitPreviewProgressBar.progress = element.learnProgressPercent
             learningKitPreviewProgressText.text = context.getString(
-                R.string.kit_preview_progress_placeholder,
+                R.string.kit_progress_placeholder,
                 element.learnProgress,
                 element.size
             )
@@ -49,7 +49,7 @@ class LearningKitsPreviewsAdapter(
             onKitClick(element)
         }
 
-        learningKitPreviewDelete.setOnClickListener {
+        learningKitPreviewDeleteButton.setOnClickListener {
             onKitRemoveClick(element, adapterPosition)
         }
     }

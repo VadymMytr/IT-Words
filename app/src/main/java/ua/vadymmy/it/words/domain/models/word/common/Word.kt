@@ -1,5 +1,6 @@
 package ua.vadymmy.it.words.domain.models.word.common
 
+import java.io.Serializable
 import ua.vadymmy.it.words.data.local.entities.word.WordEntity
 import ua.vadymmy.it.words.utils.newUUID
 
@@ -12,7 +13,7 @@ open class Word(
     var complaintsAmount: Int = NO_COMPLAINTS,
     val isAddedByUser: Boolean = IS_ADDED_BY_USER,
     val uuid: String = newUUID
-) {
+) : Serializable {
     val wordProgress: WordProgress
         get() = WordProgress.from(progress)
 

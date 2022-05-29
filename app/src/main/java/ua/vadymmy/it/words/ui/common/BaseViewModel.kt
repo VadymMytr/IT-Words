@@ -1,5 +1,6 @@
 package ua.vadymmy.it.words.ui.common
 
+import android.content.Intent
 import androidx.annotation.CallSuper
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,6 +16,10 @@ open class BaseViewModel : ViewModel() {
 
     @CallSuper
     open fun onResume() {
+    }
+
+    @CallSuper
+    open fun parseIntent(intent: Intent) {
     }
 
     protected fun onSuccess() {

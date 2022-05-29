@@ -1,5 +1,6 @@
 package ua.vadymmy.it.words.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import javax.inject.Inject
 import ua.vadymmy.it.words.domain.models.word.kit.WordKit
@@ -20,6 +21,7 @@ class PredefinedKitsViewModel @Inject constructor(
     }
 
     fun onPredefinedKitClick(kit: WordKit) {
+        Log.i("TAG", "onPredefinedKitClick: $kit")
         navigatePredefinedKitDetailsLiveData.call(kit)
     }
 }
