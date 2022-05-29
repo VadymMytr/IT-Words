@@ -46,6 +46,11 @@
     <style name="ImgStyle.Circle" parent="">
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="ImgStyle.RoundedTop" parent="">
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
+    </style>
     <!-- /Images -->
 
     <!-- Tab Layout -->

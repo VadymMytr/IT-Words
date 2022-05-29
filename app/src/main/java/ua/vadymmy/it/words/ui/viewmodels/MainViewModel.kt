@@ -6,4 +6,7 @@ import ua.vadymmy.it.words.ui.common.BaseViewModel
 class MainViewModel @Inject constructor(
 ) : BaseViewModel() {
 
+    override fun onResume() {
+        super.onResume()
+    }
 }

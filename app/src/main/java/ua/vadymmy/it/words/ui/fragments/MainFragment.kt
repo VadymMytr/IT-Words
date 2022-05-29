@@ -72,7 +72,7 @@ class MainFragment : BaseFragment() {
             }
 
             navigateUserLevelsLiveData.observe(lifecycleOwner) {
-                if(it) startActivity(UserLevelsActivity::class.java)
+                if (it) startActivity(UserLevelsActivity::class.java)
             }
         }
     }
@@ -94,6 +94,8 @@ class MainFragment : BaseFragment() {
                 currentProgress,
                 maxProgress
             )
+            mainUserLevelProgressStartText.setText(userLevel.titleRes)
+            mainUserLevelProgressEndText.setText(user.level.next.titleRes)
         }
     }
 }

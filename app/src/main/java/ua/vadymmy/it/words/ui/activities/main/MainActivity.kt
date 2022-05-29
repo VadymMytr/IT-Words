@@ -45,6 +45,11 @@ class MainActivity : BaseActivity() {
         }.attach()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.onResume()
+    }
+
     override fun observe(lifecycleOwner: LifecycleOwner) {
     }
 

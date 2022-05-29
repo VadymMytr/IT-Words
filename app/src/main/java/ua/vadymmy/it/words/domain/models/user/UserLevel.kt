@@ -11,6 +11,9 @@ enum class UserLevel(@StringRes val titleRes: Int, val levelMax: Int) {
     KING(R.string.user_level_king, 1000),
     EMPEROR(R.string.user_level_emperor, 1500);
 
+    val next: UserLevel
+        get() = if (ordinal != EMPEROR.ordinal) values()[ordinal + 1] else EMPEROR
+
     companion object {
         private const val FIRST_ITEM_ORDINAL = 0
 

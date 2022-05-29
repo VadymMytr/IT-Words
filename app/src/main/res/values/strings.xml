@@ -38,6 +38,16 @@
     <string name="main_my_kits_button">Переглянути мої набори</string>
     <!-- /Main Fragment -->
 
+    <!-- Word Kits Categories -->
+    <string name="kit_category_default">Основи</string>
+    <string name="kit_category_arch">Архітектура</string>
+    <string name="kit_category_programming">Розробка</string>
+    <string name="kit_category_math">Математика</string>
+    <string name="kit_category_other">Інші</string>
+    <string name="kit_category_custom">Користувацькі</string>
+    <!-- /Word Kits Categories -->
+
+
     <string name="oauth_client_id">862495921780-q7he038d0dvi1vnj76cj6lmapi85s8ec.apps.googleusercontent.com</string>
 
 </resources>

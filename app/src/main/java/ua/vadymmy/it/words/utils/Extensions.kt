@@ -3,8 +3,10 @@ package ua.vadymmy.it.words.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.widget.ImageView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
@@ -17,6 +19,8 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.gson.Gson
 import java.util.UUID
 import ua.vadymmy.it.words.R
+import ua.vadymmy.it.words.domain.models.word.common.Word
+import ua.vadymmy.it.words.domain.models.word.common.WordImage
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 
@@ -61,6 +65,8 @@ fun DocumentSnapshot.findStringList(fieldName: String): List<String> {
 }
 
 //context ext
+private val Context.glide get() = Glide.with(this)
+
 fun Context.showToast(@StringRes messageRes: Int) {
     Toast.makeText(this, messageRes, LENGTH_SHORT).show()
 }
@@ -82,8 +88,18 @@ fun <T> Fragment.startActivity(
     requireActivity().startActivity(activityClass, isFinishRequired, intentData)
 }
 
+//images loading ext
 fun ImageView.loadFrom(url: Uri) {
-    Glide.with(context).load(url).centerCrop()
+    context.glide.load(url).centerCrop()
         .placeholder(R.drawable.ic_no_image)
         .into(this)
 }
+
+fun ImageView.loadFrom(wordImage: WordImage) {
+    context.glide.load(wordImage.url).centerCrop()
+        .placeholder(ColorDrawable(wordImage.color))
+        .into(this)
+}
+
+//tts ext
+fun TextToSpeech.speak(word: Word) = speak(word.original, TextToSpeech.QUEUE_FLUSH, null, null)
