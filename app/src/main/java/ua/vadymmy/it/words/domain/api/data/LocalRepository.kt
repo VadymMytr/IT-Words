@@ -12,4 +12,5 @@ interface LocalRepository : DataRepository {
     suspend fun addLearningWordToKit(kitUUID: String, word: Word)
     suspend fun deleteLearningWordFromKit(kitUUID: String, word: Word)
     suspend fun getLearningWordsAmount(): Int
+    suspend fun getRandomWords(amount: Int): List<Word>
 }

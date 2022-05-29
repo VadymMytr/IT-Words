@@ -19,6 +19,7 @@
 
     <!-- Button colors -->
     <color name="colorTextBtn">@color/colorPrimary</color>
+    <color name="colorCloseBtnRed">#C80000</color>
     <color name="colorBtnPrimaryEndGradient">#738CEB</color>
     <color name="colorBtnDisabledStartGradient">#3331B784</color>
     <color name="colorBtnDisabledEndGradient">#3330AF79</color>

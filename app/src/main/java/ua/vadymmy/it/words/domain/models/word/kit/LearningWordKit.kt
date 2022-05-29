@@ -23,6 +23,7 @@ class LearningWordKit(
     val isFullyLearned get() = size == learnProgress
     val isPredefined get() = predefinedKitUUID.isNotEmpty()
     val learnProgress get() = words.count { it.wordProgress is Learned }
+    val learnProgressPercent get() = (size * learnProgress / MAX_PROGRESS).toInt()
 
     constructor(wordKit: WordKit, predefinedKitUUID: String, isFullCopy: Boolean = false) : this(
         name = wordKit.name,
@@ -47,5 +48,6 @@ class LearningWordKit(
 
     companion object {
         private const val NOT_PREDEFINED = ""
+        private const val MAX_PROGRESS = 100f
     }
 }

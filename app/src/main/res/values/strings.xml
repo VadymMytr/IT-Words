@@ -47,6 +47,9 @@
     <string name="kit_category_custom">Користувацькі</string>
     <!-- /Word Kits Categories -->
 
+    <!-- Word Kits Previews -->
+    <string name="kit_preview_progress_placeholder">%d/%d</string>
+    <!-- /Word Kits Previews -->
 
     <string name="oauth_client_id">862495921780-q7he038d0dvi1vnj76cj6lmapi85s8ec.apps.googleusercontent.com</string>
 
