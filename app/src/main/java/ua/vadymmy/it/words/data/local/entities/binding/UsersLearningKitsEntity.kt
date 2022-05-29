@@ -8,7 +8,7 @@ import ua.vadymmy.it.words.data.local.entities.word.kit.LearningWordKitEntity
 import ua.vadymmy.it.words.domain.models.word.kit.WordKit
 
 @Entity(
-    tableName = "Users_Word_LearningKits",
+    tableName = "Users_LearningKits",
     foreignKeys = [
         ForeignKey(
             entity = UserEntity::class,

@@ -55,7 +55,7 @@ interface WordsDao {
 
     @Query(
         "SELECT * FROM Learning_Word_Kits " +
-                "INNER JOIN Users_Word_LearningKits ON users_kits_kit_uuid = word_kit_uuid " +
+                "INNER JOIN Users_LearningKits ON users_kits_kit_uuid = word_kit_uuid " +
                 "WHERE users_kits_user_id = :userId"
     )
     suspend fun getAllLearningPreviews(userId: String): List<LearningWordKitEntity>
@@ -78,6 +78,9 @@ interface WordsDao {
     @Query("SELECT EXISTS (SELECT * FROM Words WHERE word_uuid = :wordUUID)")
     suspend fun isWordExists(wordUUID: String): Boolean
 
+    @Query("SELECT EXISTS (SELECT * FROM Learning_Word_Kits WHERE learning_word_kit_predefined_uuid = :wordKitUUID)")
+    suspend fun isKitLearning(wordKitUUID: String): Boolean
+
     @Query(
         "SELECT EXISTS " +
                 "(SELECT * FROM Words " +
@@ -87,7 +90,7 @@ interface WordsDao {
     suspend fun isWordLearning(wordUUID: String, userId: String): Boolean
 
     @Query("SELECT * FROM Words ORDER BY RANDOM() LIMIT :amount")
-    suspend fun getRandomWords(amount: Int) : List<WordEntity>
+    suspend fun getRandomWords(amount: Int): List<WordEntity>
     //END READ
 
     //UPDATE

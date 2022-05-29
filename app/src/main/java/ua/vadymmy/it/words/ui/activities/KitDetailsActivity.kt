@@ -87,6 +87,13 @@ class KitDetailsActivity : BaseActivity() {
                 }
             }
 
+            wordKitSizeLiveData.observe(lifecycleOwner) { size ->
+                binding.kitDetailsSizeText.text = getString(
+                    R.string.kit_details_size_placeholder,
+                    size
+                )
+            }
+
             removeWordAtLiveData.observe(lifecycleOwner) {
                 if (it != REMOVE_AT_DEFAULT) {
                     recyclerAdapter.removeAt(it)
@@ -116,7 +123,6 @@ class KitDetailsActivity : BaseActivity() {
     private fun fillWordKit(wordKit: WordKit) {
         with(binding) {
             kitDetailsNameText.text = wordKit.name
-            kitDetailsSizeText.text = getString(R.string.kit_details_size_placeholder, wordKit.size)
             kitDetailsImage.loadFrom(wordKit.image)
 
             val areNoWords = wordKit.words.isEmpty()

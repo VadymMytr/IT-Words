@@ -17,8 +17,8 @@ abstract class BaseAdapter<BINDING_TYPE : ViewBinding, ELEMENT_TYPE> :
 
     fun removeAt(position: Int) {
         if (position > elements.lastIndex) return
-        notifyItemRemoved(position)
         elements.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     override fun getItemCount(): Int = elements.size

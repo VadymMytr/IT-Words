@@ -21,12 +21,12 @@ class WordsAdapter(
     private var isLearningKit: Boolean = false
 
     fun setWords(wordKit: WordKit) {
-        elements = wordKit.words
+        elements = wordKit.words.toMutableList()
         isLearningKit = false
     }
 
     fun setWords(wordKit: LearningWordKit) {
-        elements = wordKit.words
+        elements = wordKit.words.toMutableList()
         isLearningKit = true
     }
 

@@ -27,6 +27,7 @@ class KitDetailsViewModel @Inject constructor(
 
     val predefinedWordKitLiveData = MutableLiveData<WordKit?>(null)
     val learningWordKitLiveData = MutableLiveData<LearningWordKit?>(null)
+    val wordKitSizeLiveData = MutableLiveData(DEFAULT_SIZE)
     val removeWordAtLiveData = MutableLiveData(REMOVE_AT_DEFAULT)
     val navigateToSearchLiveData = MutableLiveData<LearningWordKit?>(null)
     val navigateToTestLiveData = MutableLiveData<LearningWordKit?>(null)
@@ -36,6 +37,7 @@ class KitDetailsViewModel @Inject constructor(
         super.parseIntent(intent)
         loadData {
             val wordKit = intent.getSerializableExtra(KEY_BUNDLE_WORD_KIT) as WordKit
+
             if (wordKit is LearningWordKit) {
                 learningWordKitLiveData.value = wordKit
             } else {
@@ -46,6 +48,8 @@ class KitDetailsViewModel @Inject constructor(
 
                 predefinedWordKitLiveData.value = wordKit
             }
+
+            wordKitSizeLiveData.value = wordKit.size
         }
     }
 
@@ -77,18 +81,23 @@ class KitDetailsViewModel @Inject constructor(
 
         deleteLearningWordFromKitUseCase(DeleteWordQuery(kit, indexOf))
         removeWordAtLiveData.call(adapterPosition)
-        learningWordKitLiveData.value = kit
+        wordKitSizeLiveData.value = kit.size
     }
 
     fun onLearnWordsClick() = loadData {
         predefinedWordKitLiveData.value?.let { predefinedKit ->
             val learningKit = LearningWordKit(predefinedKit, predefinedKit.uuid)
             addLearningWordKitUseCase(learningKit)
+
             navigateToTestLiveData.call(learningKit)
         }
 
         learningWordKitLiveData.value?.let { learningWordKit ->
             navigateToTestLiveData.call(learningWordKit)
         }
+    }
+
+    private companion object {
+        private const val DEFAULT_SIZE = 0
     }
 }

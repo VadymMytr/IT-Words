@@ -2,10 +2,12 @@ package ua.vadymmy.it.words.ui.common
 
 import android.content.Intent
 import androidx.annotation.CallSuper
+import androidx.annotation.StringRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import ua.vadymmy.it.words.utils.call
 import ua.vadymmy.it.words.utils.emit
 
 open class BaseViewModel : ViewModel() {
@@ -13,6 +15,7 @@ open class BaseViewModel : ViewModel() {
     val onFailureLiveData = MutableLiveData<Boolean>()
     val showLoaderLiveData = MutableLiveData(false)
     val hideLoaderLiveData = MutableLiveData(false)
+    val showMessageLiveData = MutableLiveData(DEFAULT_MESSAGE)
 
     @CallSuper
     open fun onResume() {
@@ -38,6 +41,10 @@ open class BaseViewModel : ViewModel() {
         }
     }
 
+    protected fun showMessage(@StringRes titleRes: Int) {
+        showMessageLiveData.call(titleRes)
+    }
+
     protected fun onLoadingStart() = showLoader(isLoading = true)
 
     protected fun onLoadingEnd() = showLoader(isLoading = false)
@@ -45,5 +52,9 @@ open class BaseViewModel : ViewModel() {
     private fun showLoader(isLoading: Boolean) {
         showLoaderLiveData.value = isLoading
         hideLoaderLiveData.value = !isLoading
+    }
+
+    companion object {
+        const val DEFAULT_MESSAGE = -1
     }
 }

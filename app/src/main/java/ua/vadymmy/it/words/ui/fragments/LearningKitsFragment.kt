@@ -56,6 +56,14 @@ class LearningKitsFragment : BaseFragment() {
 
     override fun observe(lifecycleOwner: LifecycleOwner) {
         with(viewModel) {
+            showLoaderLiveData.observe(lifecycleOwner) {
+                if (it) showLoading()
+            }
+
+            hideLoaderLiveData.observe(lifecycleOwner) {
+                if (it) hideLoading()
+            }
+
             learningKitsLiveData.observe(lifecycleOwner) { kits ->
                 val isEmpty = kits.isEmpty()
                 binding.learningKitsEmptyText.isVisible = isEmpty

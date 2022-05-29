@@ -64,6 +64,10 @@ class MainFragment : BaseFragment() {
                 fillUserData(user)
             }
 
+            learningWordsAmountLiveData.observe(lifecycleOwner) { amount ->
+                binding.mainWordsAmountText.text = amount.toString()
+            }
+
             navigateAuthLiveData.observe(lifecycleOwner) {
                 if (it) startActivity(
                     AuthActivity::class.java,

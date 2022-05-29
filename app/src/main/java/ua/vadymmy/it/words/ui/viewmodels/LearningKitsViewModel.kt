@@ -1,7 +1,9 @@
 package ua.vadymmy.it.words.ui.viewmodels
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 import ua.vadymmy.it.words.domain.models.word.kit.LearningWordKit
 import ua.vadymmy.it.words.domain.words.both.DeleteLearningWordKit
 import ua.vadymmy.it.words.domain.words.local.GetAllLearningKitsUseCase
@@ -15,15 +17,15 @@ class LearningKitsViewModel @Inject constructor(
     private val deleteLearningWordKit: DeleteLearningWordKit
 ) : BaseViewModel() {
 
-    val learningKitsLiveData = MutableLiveData<List<LearningWordKit>>()
+    val learningKitsLiveData = MutableLiveData<MutableList<LearningWordKit>>()
     val openKitDetailsLiveData = MutableLiveData<LearningWordKit?>(null)
     val showNewKitDialogLiveData = MutableLiveData(false)
     val removeKitAtLiveData = MutableLiveData(REMOVE_AT_DEFAULT)
 
     override fun onResume() {
         super.onResume()
-        loadData {
-            learningKitsLiveData.value = getAllLearningKitsUseCase(Unit)
+        viewModelScope.launch {
+            learningKitsLiveData.value = getAllLearningKitsUseCase(Unit).toMutableList()
         }
     }
 
@@ -32,9 +34,13 @@ class LearningKitsViewModel @Inject constructor(
     }
 
     fun onRemoveLearningKitClick(learningWordKit: LearningWordKit, adapterPosition: Int) {
-        loadData {
+        viewModelScope.launch {
             deleteLearningWordKit(learningWordKit)
             removeKitAtLiveData.call(adapterPosition)
+            learningKitsLiveData.value?.let {
+                it.remove(learningWordKit)
+                if (it.isEmpty()) learningKitsLiveData.value = it
+            }
         }
     }
 

@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:fontFamily="@font/roboto_black"
+            android:visibility="gone"
             android:gravity="center"
             android:text="@string/kits_learning_not_learning"
             android:textColor="@color/colorPrimaryDark"

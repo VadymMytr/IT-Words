@@ -130,7 +130,10 @@ class RoomDataRepository @Inject constructor(
     }
 
     override suspend fun getPredefinedWordKitsPreviews(): List<WordKit> {
-        val predefinedKitsPreviews = wordsDao.getAllPredefinedKitsPreviews()
+        val predefinedKitsPreviews = wordsDao.getAllPredefinedKitsPreviews().filterNot {
+            wordsDao.isKitLearning(it.word_kit_uuid)
+        }
+
         return predefinedKitsPreviews.map { WordKit(it) }
     }
 

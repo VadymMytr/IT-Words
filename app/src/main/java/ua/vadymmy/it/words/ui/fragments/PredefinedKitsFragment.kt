@@ -50,6 +50,14 @@ class PredefinedKitsFragment : BaseFragment() {
 
     override fun observe(lifecycleOwner: LifecycleOwner) {
         with(viewModel) {
+            showLoaderLiveData.observe(lifecycleOwner) {
+                if (it) showLoading()
+            }
+
+            hideLoaderLiveData.observe(lifecycleOwner) {
+                if (it) hideLoading()
+            }
+
             predefinedKitsLiveData.observe(lifecycleOwner) { kits ->
                 if (kits.isNotEmpty()) recyclerAdapter.elements = kits.toMutableList()
             }
