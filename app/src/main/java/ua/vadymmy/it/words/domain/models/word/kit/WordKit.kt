@@ -1,5 +1,6 @@
 package ua.vadymmy.it.words.domain.models.word.kit
 
+import java.io.Serializable
 import ua.vadymmy.it.words.data.local.entities.word.kit.PredefinedWordKitEntity
 import ua.vadymmy.it.words.domain.models.word.common.Word
 import ua.vadymmy.it.words.domain.models.word.common.WordImage
@@ -11,7 +12,7 @@ open class WordKit(
     val category: WordKitCategory,
     val words: MutableList<Word>,
     val uuid: String = newUUID
-) {
+) : Serializable {
     val size get() = words.size
 
     constructor(

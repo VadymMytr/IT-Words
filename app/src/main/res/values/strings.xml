@@ -26,7 +26,7 @@
     <!-- Main Activity -->
     <string name="main_tab_home">Головна</string>
     <string name="main_tab_my_kits">Мої набори</string>
-    <string name="main_tab_all_kits">Усі набори</string>
+    <string name="main_tab_predefined_kits">Готові набори</string>
     <string name="main_loading">Завантаження…</string>
     <!-- /Main Activity -->
 

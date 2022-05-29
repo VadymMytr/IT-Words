@@ -1,5 +1,6 @@
 package ua.vadymmy.it.words.domain.models.word.kit
 
+import java.io.Serializable
 import ua.vadymmy.it.words.data.local.entities.word.kit.LearningWordKitEntity
 import ua.vadymmy.it.words.domain.models.word.common.Word
 import ua.vadymmy.it.words.domain.models.word.common.WordImage
@@ -19,7 +20,7 @@ class LearningWordKit(
     category = category,
     words = words,
     uuid = uuid
-) {
+), Serializable {
     val isFullyLearned get() = size == learnProgress
     val isPredefined get() = predefinedKitUUID.isNotEmpty()
     val learnProgress get() = words.count { it.wordProgress is Learned }

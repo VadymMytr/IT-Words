@@ -52,6 +52,11 @@
             android:name=".ui.activities.UserLevelsActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activities.KitDetailsActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

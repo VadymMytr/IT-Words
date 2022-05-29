@@ -8,6 +8,7 @@ import ua.vadymmy.it.words.ui.activities.main.NavigationTab.ALL_KITS
 import ua.vadymmy.it.words.ui.activities.main.NavigationTab.HOME
 import ua.vadymmy.it.words.ui.activities.main.NavigationTab.MY_KITS
 import ua.vadymmy.it.words.ui.fragments.MainFragment
+import ua.vadymmy.it.words.ui.fragments.PredefinedKitsFragment
 
 class MainPagerAdapter(val mainActivity: MainActivity) : FragmentStateAdapter(mainActivity) {
 
@@ -15,7 +16,7 @@ class MainPagerAdapter(val mainActivity: MainActivity) : FragmentStateAdapter(ma
         when (NavigationTab.from(position)) {
             HOME -> MainFragment()
             MY_KITS -> MainFragment()
-            ALL_KITS -> MainFragment()
+            ALL_KITS -> PredefinedKitsFragment()
         }
 
     override fun getItemCount(): Int = NavigationTab.amount

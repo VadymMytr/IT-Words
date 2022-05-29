@@ -11,6 +11,7 @@ import ua.vadymmy.it.words.ui.activities.SplashActivity
 import ua.vadymmy.it.words.ui.activities.SyncActivity
 import ua.vadymmy.it.words.ui.activities.main.MainActivity
 import ua.vadymmy.it.words.ui.fragments.MainFragment
+import ua.vadymmy.it.words.ui.fragments.PredefinedKitsFragment
 
 @Singleton
 @Component(modules = [ApiModule::class, AuthModule::class, DataModule::class, ContextModule::class])
@@ -22,4 +23,5 @@ interface AppComponent {
     fun injectActivity(activity: SyncActivity)
 
     fun injectFragment(fragment: MainFragment)
+    fun injectFragment(fragment: PredefinedKitsFragment)
 }
