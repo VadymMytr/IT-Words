@@ -13,6 +13,12 @@ enum class SearchLocale(private val ranges: Array<IntRange>) {
         )
     );
 
+    val randomLetterCode: Int
+        get() {
+            val randomRange = ranges.random()
+            return randomRange.random()
+        }
+
     private fun isQueryAllowed(query: String) = query.any {
         isLetterAllowed(it)
     }

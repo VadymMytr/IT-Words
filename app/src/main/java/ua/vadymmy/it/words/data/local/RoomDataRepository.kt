@@ -125,6 +125,10 @@ class RoomDataRepository @Inject constructor(
         return learningKits
     }
 
+    override suspend fun getRandomWords(amount: Int): List<Word> {
+        return wordsDao.getRandomWords(amount).map { Word(it) }
+    }
+
     override suspend fun getPredefinedWordKitsPreviews(): List<WordKit> {
         val predefinedKitsPreviews = wordsDao.getAllPredefinedKitsPreviews()
         return predefinedKitsPreviews.map { WordKit(it) }

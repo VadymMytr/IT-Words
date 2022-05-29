@@ -18,6 +18,10 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.gson.Gson
 import java.util.UUID
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
 import ua.vadymmy.it.words.R
 import ua.vadymmy.it.words.domain.models.word.common.Word
 import ua.vadymmy.it.words.domain.models.word.common.WordImage
@@ -42,6 +46,9 @@ fun MutableLiveData<Boolean>.emit() {
 
 //coroutine ext
 fun Continuation<Unit>.resume() = this.resume(Unit)
+fun <T> CoroutineScope.lazy(block: suspend CoroutineScope.() -> T): Deferred<T> {
+    return async(start = CoroutineStart.LAZY) { block() }
+}
 
 //firebase ext
 private const val STRING_NOT_FOUND = ""

@@ -85,6 +85,9 @@ interface WordsDao {
                 "WHERE users_learning_words_user_id = :userId AND word_uuid = :wordUUID)"
     )
     suspend fun isWordLearning(wordUUID: String, userId: String): Boolean
+
+    @Query("SELECT * FROM Words ORDER BY RANDOM() LIMIT :amount")
+    suspend fun getRandomWords(amount: Int) : List<WordEntity>
     //END READ
 
     //UPDATE

@@ -9,6 +9,7 @@ interface DataRepository {
     suspend fun updateUser(user: User)
     suspend fun addComplaintOn(word: Word)
     suspend fun getLearningWordKits(): List<LearningWordKit>
+    suspend fun getRandomWords(amount: Int): List<Word>
     suspend fun addLearningWordKit(learningWordKit: LearningWordKit)
     suspend fun updateLearningWordKit(learningWordKit: LearningWordKit)
     suspend fun removeLearningWordKit(learningWordKit: LearningWordKit)

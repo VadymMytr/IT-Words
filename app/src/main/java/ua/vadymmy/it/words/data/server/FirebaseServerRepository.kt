@@ -35,6 +35,7 @@ import ua.vadymmy.it.words.domain.models.word.search.SearchLocale.UK
 import ua.vadymmy.it.words.domain.models.word.search.SearchParameters
 import ua.vadymmy.it.words.utils.AuthHelper
 import ua.vadymmy.it.words.utils.NetworkHelper
+import ua.vadymmy.it.words.utils.lazy
 import ua.vadymmy.it.words.utils.resume
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -48,6 +49,14 @@ class FirebaseServerRepository @Inject constructor(
     private val users get() = db.collection(USERS_COLLECTION)
     private val words get() = db.collection(WORDS_COLLECTION)
     private val predefinedKits get() = db.collection(WORDS_KITS_COLLECTION)
+    private val wordsAmount = CoroutineScope(Dispatchers.IO).lazy {
+        val amount = CompletableDeferred<Int>()
+        words.get().addCompleteListener {
+            amount.complete(it?.size() ?: NOT_FOUND)
+        }
+
+        return@lazy amount.await()
+    }
 
     private val currentUserDoc get() = users.document(authHelper.currentUserUid)
     private val learningWords get() = currentUserDoc.collection(LEARNING_WORDS_COLLECTION)
@@ -109,6 +118,33 @@ class FirebaseServerRepository @Inject constructor(
         users.document(uid).get().addCompleteListener {
             continuation.resume(it?.mapToUser())
         }
+    }
+
+    override suspend fun getRandomWords(amount: Int): List<Word> {
+        if (!networkHelper.isConnectionAvailable) return emptyList()
+
+        val answersResult = CompletableDeferred<List<Word>>()
+        val answers = mutableListOf<Word>()
+        val randomIndices = mutableListOf<String>().apply {
+            repeat(amount) {
+                add(Char(EN.randomLetterCode).toString())
+            }
+        }
+
+        randomIndices.forEach { index ->
+            words.orderBy(KEY_ORIGINAL)
+                .startAt(index)
+                .limit(ONE_WORD)
+                .get()
+                .addCompleteListener { query ->
+                    answers.addAll(query?.documents?.map { doc -> doc.mapToWord() } ?: listOf())
+                    if (answers.size == amount || answers.isEmpty()) {
+                        answersResult.complete(answers)
+                    }
+                }
+        }
+
+        return answersResult.await()
     }
 
     private suspend fun <T> getWordKits(
@@ -288,5 +324,7 @@ class FirebaseServerRepository @Inject constructor(
         private const val LEARNING_WORDS_COLLECTION = "Learning Words Progress"
         private const val LEARNING_KITS_COLLECTION = "Learning Kits"
         private const val SEARCH_LIMIT = 10L
+        private const val NOT_FOUND = 0
+        private const val ONE_WORD = 1L
     }
 }
