@@ -35,7 +35,7 @@
     <style name="BtnStyle.AppPrimary.Outline" parent="BtnStyle">
         <item name="android:background">@drawable/selector_btn_outline</item>
         <item name="android:textColor">@drawable/selector_text_primary</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_height">64dp</item>
         <item name="android:padding">8sp</item>
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">18sp</item>

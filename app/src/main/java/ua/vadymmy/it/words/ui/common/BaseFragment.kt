@@ -44,6 +44,10 @@ abstract class BaseFragment : Fragment() {
         injectFragment(MyApp.injector)
         configureViews()
         observe(viewLifecycleOwner)
+    }
+
+    override fun onResume() {
+        super.onResume()
         titleId.takeIf { it != DEFAULT_TITLE }?.let { titleString ->
             (requireActivity() as? BaseActivity)?.titleTextView?.setText(titleString)
         }
