@@ -10,6 +10,7 @@ import ua.vadymmy.it.words.ui.activities.AuthActivity
 import ua.vadymmy.it.words.ui.activities.SplashActivity
 import ua.vadymmy.it.words.ui.activities.SyncActivity
 import ua.vadymmy.it.words.ui.activities.main.MainActivity
+import ua.vadymmy.it.words.ui.fragments.LearningKitsFragment
 import ua.vadymmy.it.words.ui.fragments.MainFragment
 import ua.vadymmy.it.words.ui.fragments.PredefinedKitsFragment
 
@@ -23,5 +24,6 @@ interface AppComponent {
     fun injectActivity(activity: SyncActivity)
 
     fun injectFragment(fragment: MainFragment)
+    fun injectFragment(fragment: LearningKitsFragment)
     fun injectFragment(fragment: PredefinedKitsFragment)
 }

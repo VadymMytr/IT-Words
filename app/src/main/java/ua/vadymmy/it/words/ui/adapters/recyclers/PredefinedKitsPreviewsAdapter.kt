@@ -1,5 +1,6 @@
 package ua.vadymmy.it.words.ui.adapters.recyclers
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.allViews
@@ -15,15 +16,16 @@ class PredefinedKitsPreviewsAdapter(
     override fun inflateBinding(
         layoutInflater: LayoutInflater,
         parent: ViewGroup
-    ) = ItemPredefinedKitPreviewBinding.inflate(layoutInflater)
+    ) = ItemPredefinedKitPreviewBinding.inflate(layoutInflater, parent, false)
 
-    override fun onBindElement(binding: ItemPredefinedKitPreviewBinding, element: WordKit) {
-        with(binding) {
-            predefinedKitPreviewImage.loadFrom(element.image)
-            predefinedKitPreviewName.text = element.name
-            predefinedKitPreviewCategory.setText(element.category.titleRes)
-
-            root.allViews.forEach { it.setOnClickListener { onKitClick(element) } }
-        }
+    override fun ItemPredefinedKitPreviewBinding.onBindElement(
+        element: WordKit,
+        context: Context,
+        adapterPosition: Int
+    ) {
+        predefinedKitPreviewImage.loadFrom(element.image)
+        predefinedKitPreviewName.text = element.name
+        predefinedKitPreviewCategory.setText(element.category.titleRes)
+        root.allViews.forEach { it.setOnClickListener { onKitClick(element) } }
     }
 }

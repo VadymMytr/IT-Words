@@ -38,7 +38,6 @@
         android:id="@+id/main_pager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/browser_actions_bg_grey"
         app:layout_constraintBottom_toTopOf="@+id/main_tabs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

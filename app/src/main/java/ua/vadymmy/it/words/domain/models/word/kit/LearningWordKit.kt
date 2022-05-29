@@ -24,7 +24,7 @@ class LearningWordKit(
     val isFullyLearned get() = size == learnProgress
     val isPredefined get() = predefinedKitUUID.isNotEmpty()
     val learnProgress get() = words.count { it.wordProgress is Learned }
-    val learnProgressPercent get() = (size * learnProgress / MAX_PROGRESS).toInt()
+    val learnProgressPercent get() = size * learnProgress / MAX_PROGRESS
 
     constructor(wordKit: WordKit, predefinedKitUUID: String, isFullCopy: Boolean = false) : this(
         name = wordKit.name,
