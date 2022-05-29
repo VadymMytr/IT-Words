@@ -12,6 +12,6 @@ class GetAllLearningKitsUseCase @Inject constructor(
 ) : BackgroundUseCase<Unit, List<LearningWordKit>>() {
 
     override suspend fun execute(request: Unit): List<LearningWordKit> {
-        return localRepository.getLearningWordKits()
+        return localRepository.getLearningWordKits().sortedBy { it.category }
     }
 }

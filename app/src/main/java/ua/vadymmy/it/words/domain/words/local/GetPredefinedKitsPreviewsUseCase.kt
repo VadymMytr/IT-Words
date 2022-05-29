@@ -12,6 +12,6 @@ class GetPredefinedKitsPreviewsUseCase @Inject constructor(
 ) : BackgroundUseCase<Unit, List<WordKit>>() {
 
     override suspend fun execute(request: Unit): List<WordKit> {
-        return localRepository.getPredefinedWordKitsPreviews()
+        return localRepository.getPredefinedWordKitsPreviews().sortedBy { it.category }
     }
 }
