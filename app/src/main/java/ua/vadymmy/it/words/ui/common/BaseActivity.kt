@@ -30,6 +30,10 @@ abstract class BaseActivity : AppCompatActivity() {
         injectActivity(MyApp.injector)
         configureViews()
         observe(this as LifecycleOwner)
+    }
+
+    override fun onResume() {
+        super.onResume()
         titleId.takeIf { it != DEFAULT_TITLE }?.let { titleString ->
             titleTextView?.text = getString(titleString)
         }

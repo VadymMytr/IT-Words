@@ -8,6 +8,7 @@ import ua.vadymmy.it.words.di.modules.ContextModule
 import ua.vadymmy.it.words.di.modules.DataModule
 import ua.vadymmy.it.words.ui.activities.AuthActivity
 import ua.vadymmy.it.words.ui.activities.KitDetailsActivity
+import ua.vadymmy.it.words.ui.activities.SearchActivity
 import ua.vadymmy.it.words.ui.activities.SplashActivity
 import ua.vadymmy.it.words.ui.activities.SyncActivity
 import ua.vadymmy.it.words.ui.activities.main.MainActivity
@@ -24,6 +25,7 @@ interface AppComponent {
     fun injectActivity(activity: AuthActivity)
     fun injectActivity(activity: SyncActivity)
     fun injectActivity(activity: KitDetailsActivity)
+    fun injectActivity(activity: SearchActivity)
 
     fun injectFragment(fragment: MainFragment)
     fun injectFragment(fragment: LearningKitsFragment)

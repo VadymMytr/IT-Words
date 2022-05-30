@@ -33,6 +33,6 @@
     <!-- /Progress colors -->
 
     <!-- Image colors -->
-    <color name="colorTranslucentImage">#40000000</color>
+    <color name="colorTranslucentImage">#59000000</color>
     <!-- /Image colors -->
 </resources>

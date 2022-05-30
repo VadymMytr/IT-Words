@@ -3,6 +3,7 @@ package ua.vadymmy.it.words.ui.adapters.recyclers
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.CallSuper
 import androidx.core.view.isVisible
 import ua.vadymmy.it.words.databinding.ItemWordBinding
 import ua.vadymmy.it.words.domain.models.word.common.Word
@@ -13,19 +14,19 @@ import ua.vadymmy.it.words.domain.models.word.kit.LearningWordKit
 import ua.vadymmy.it.words.domain.models.word.kit.WordKit
 import ua.vadymmy.it.words.ui.common.BaseAdapter
 
-class WordsAdapter(
+open class WordsAdapter(
     private val onSpeakWordClick: (Word) -> Unit,
     private val onWordRemoveClick: (Word, adapterPosition: Int) -> Unit = { _, _ -> }
 ) : BaseAdapter<ItemWordBinding, Word>() {
 
     private var isLearningKit: Boolean = false
 
-    fun setWords(wordKit: WordKit) {
+    open fun setWords(wordKit: WordKit) {
         elements = wordKit.words.toMutableList()
         isLearningKit = false
     }
 
-    fun setWords(wordKit: LearningWordKit) {
+    open fun setWords(wordKit: LearningWordKit) {
         elements = wordKit.words.toMutableList()
         isLearningKit = true
     }
@@ -42,7 +43,6 @@ class WordsAdapter(
     ) {
         wordItemOriginal.text = element.original
         wordItemTranslate.text = element.translate
-        wordItemDeleteButton.isVisible = isLearningKit
 
         when (val wordProgress = element.wordProgress) {
             is Learned -> {
@@ -61,13 +61,21 @@ class WordsAdapter(
             }
         }
 
-        wordItemSpeakButton.setOnClickListener {
-            onSpeakWordClick(element)
-            wordItemSpeakButton.playAnimation()
-        }
+        updateWordButtons(this, element, adapterPosition)
+    }
 
-        wordItemDeleteButton.setOnClickListener {
-            onWordRemoveClick(element, adapterPosition)
+    @CallSuper
+    open fun updateWordButtons(binding: ItemWordBinding, element: Word, adapterPosition: Int) {
+        with(binding) {
+            wordItemDeleteButton.isVisible = isLearningKit
+            wordItemDeleteButton.setOnClickListener {
+                onWordRemoveClick(element, adapterPosition)
+            }
+
+            wordItemSpeakButton.setOnClickListener {
+                onSpeakWordClick(element)
+                wordItemSpeakButton.playAnimation()
+            }
         }
     }
 }

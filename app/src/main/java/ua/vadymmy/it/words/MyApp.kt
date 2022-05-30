@@ -14,7 +14,7 @@ import ua.vadymmy.it.words.di.DaggerAppComponent
 class MyApp : Application() {
     companion object {
         private lateinit var instance: MyApp
-        private const val TTS_GB_VOICE = "en-gb-x-fis-local"
+        private const val TTS_GB_VOICE = "en-gb-x-gbd-local"
         val injector: AppComponent get() = instance.appComponent
         val appContext: Context get() = instance.applicationContext
         val database: RoomDB get() = instance.roomDB

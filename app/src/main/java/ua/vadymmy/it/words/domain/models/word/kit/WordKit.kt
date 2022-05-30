@@ -14,6 +14,7 @@ open class WordKit(
     val uuid: String = newUUID
 ) : Serializable {
     val size get() = words.size
+    val isEmpty get() = size == NO_ITEMS
 
     constructor(
         wordKit: PredefinedWordKitEntity,
@@ -25,4 +26,8 @@ open class WordKit(
         words = words,
         uuid = wordKit.word_kit_uuid
     )
+
+    private companion object {
+        private const val NO_ITEMS = 0
+    }
 }

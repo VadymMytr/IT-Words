@@ -1,7 +1,9 @@
 package ua.vadymmy.it.words.ui.activities
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import javax.inject.Inject
@@ -10,11 +12,15 @@ import ua.vadymmy.it.words.databinding.ActivityKitDetailsBinding
 import ua.vadymmy.it.words.di.AppComponent
 import ua.vadymmy.it.words.domain.models.word.kit.LearningWordKit
 import ua.vadymmy.it.words.domain.models.word.kit.WordKit
+import ua.vadymmy.it.words.ui.activities.SearchActivity.Companion.KEY_SEARCH_BUNDLE_KIT
 import ua.vadymmy.it.words.ui.adapters.recyclers.WordsAdapter
 import ua.vadymmy.it.words.ui.common.BaseActivity
 import ua.vadymmy.it.words.ui.viewmodels.KitDetailsViewModel
+import ua.vadymmy.it.words.ui.viewmodels.KitDetailsViewModel.Companion.DEFAULT_SIZE
+import ua.vadymmy.it.words.ui.viewmodels.KitDetailsViewModel.KitProgress
 import ua.vadymmy.it.words.utils.REMOVE_AT_DEFAULT
 import ua.vadymmy.it.words.utils.loadFrom
+import ua.vadymmy.it.words.utils.startActivity
 
 class KitDetailsActivity : BaseActivity() {
 
@@ -29,16 +35,19 @@ class KitDetailsActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
+        Log.i("TAG", "onBackPressed() details")
         finish()
     }
 
     override fun onResume() {
         super.onResume()
+        Log.i("TAG", "onResume() details")
         viewModel.parseIntent(intent)
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
+        Log.i("TAG", "onNewIntent() details")
         intent?.let { viewModel.parseIntent(it) }
     }
 
@@ -59,6 +68,10 @@ class KitDetailsActivity : BaseActivity() {
             }
 
             kitDetailsSearchButton.setOnClickListener {
+                viewModel.onAddWordsClick()
+            }
+
+            kitDetailsProgressAddWordButton.setOnClickListener {
                 viewModel.onAddWordsClick()
             }
         }
@@ -94,6 +107,10 @@ class KitDetailsActivity : BaseActivity() {
                 )
             }
 
+            wordKitProgressLiveData.observe(lifecycleOwner) { kitProgress ->
+                fillLearningProgress(kitProgress)
+            }
+
             removeWordAtLiveData.observe(lifecycleOwner) {
                 if (it != REMOVE_AT_DEFAULT) {
                     recyclerAdapter.removeAt(it)
@@ -102,7 +119,11 @@ class KitDetailsActivity : BaseActivity() {
 
             navigateToSearchLiveData.observe(lifecycleOwner) { learningWordKit ->
                 learningWordKit?.let {
-                    //TODO nav search
+                    startActivity(
+                        SearchActivity::class.java,
+                        isFinishRequired = false,
+                        intentData = bundleOf(KEY_SEARCH_BUNDLE_KIT to learningWordKit)
+                    )
                 }
             }
 
@@ -115,6 +136,17 @@ class KitDetailsActivity : BaseActivity() {
             navigateToTestLiveData.observe(lifecycleOwner) { learningWordKit ->
                 learningWordKit?.let {
                     //TODO nav test
+                }
+            }
+
+            navigateToLearningKitDetailsLiveData.observe(lifecycleOwner) { learningWordKit ->
+                learningWordKit?.let {
+                    Log.i("TAG", "navigateToLearningKitDetailsLiveData")
+                    startActivity(
+                        KitDetailsActivity::class.java,
+                        isFinishRequired = true,
+                        intentData = bundleOf(KEY_BUNDLE_WORD_KIT to learningWordKit)
+                    )
                 }
             }
         }
@@ -135,6 +167,19 @@ class KitDetailsActivity : BaseActivity() {
 
     private fun fillLearningWordKit(wordKit: LearningWordKit) {
         recyclerAdapter.setWords(wordKit)
+        fillLearningProgress(KitProgress.from(wordKit))
+    }
+
+    private fun fillLearningProgress(kitProgress: KitProgress) {
+        with(binding) {
+            kitDetailsProgressLayout.isVisible = kitProgress.size != DEFAULT_SIZE
+            kitDetailsProgressBar.setProgress(kitProgress.progressPercent, true)
+            kitDetailsProgressText.text = getString(
+                R.string.kit_progress_placeholder,
+                kitProgress.progress,
+                kitProgress.size
+            )
+        }
     }
 
     companion object {

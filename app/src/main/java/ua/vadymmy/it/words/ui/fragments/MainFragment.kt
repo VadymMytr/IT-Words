@@ -33,6 +33,10 @@ class MainFragment : BaseFragment() {
             mainUserLevelsDetailsButton.setOnClickListener {
                 viewModel.onUserLevelsDetailsClick()
             }
+
+            mainKitsButton.setOnClickListener {
+                openMyKits()
+            }
         }
     }
 

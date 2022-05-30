@@ -28,9 +28,11 @@ class KitDetailsViewModel @Inject constructor(
     val predefinedWordKitLiveData = MutableLiveData<WordKit?>(null)
     val learningWordKitLiveData = MutableLiveData<LearningWordKit?>(null)
     val wordKitSizeLiveData = MutableLiveData(DEFAULT_SIZE)
+    val wordKitProgressLiveData = MutableLiveData<KitProgress>()
     val removeWordAtLiveData = MutableLiveData(REMOVE_AT_DEFAULT)
     val navigateToSearchLiveData = MutableLiveData<LearningWordKit?>(null)
     val navigateToTestLiveData = MutableLiveData<LearningWordKit?>(null)
+    val navigateToLearningKitDetailsLiveData = MutableLiveData<LearningWordKit?>(null)
     val navigateToCardsLiveData = MutableLiveData<WordKit?>(null)
 
     override fun parseIntent(intent: Intent) {
@@ -40,6 +42,7 @@ class KitDetailsViewModel @Inject constructor(
 
             if (wordKit is LearningWordKit) {
                 learningWordKitLiveData.value = wordKit
+                wordKitProgressLiveData.value = KitProgress.from(wordKit)
             } else {
                 with(wordKit.words) {
                     clear()
@@ -50,6 +53,17 @@ class KitDetailsViewModel @Inject constructor(
             }
 
             wordKitSizeLiveData.value = wordKit.size
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        predefinedWordKitLiveData.value?.let { predefinedKit ->
+            predefinedWordKitLiveData.value = predefinedKit
+        }
+
+        learningWordKitLiveData.value?.let { learningWordKit ->
+            predefinedWordKitLiveData.value = learningWordKit
         }
     }
 
@@ -73,23 +87,24 @@ class KitDetailsViewModel @Inject constructor(
 
     fun onSpeakWordClick(word: Word) = viewModelScope.launch { pronounceWordUseCase(word) }
 
-    fun onRemoveWordClick(word: Word, adapterPosition: Int) = loadData {
-        val kit = learningWordKitLiveData.value ?: return@loadData
+    fun onRemoveWordClick(word: Word, adapterPosition: Int) = viewModelScope.launch {
+        val kit = learningWordKitLiveData.value ?: return@launch
         val indexOf = kit.words.indexOf(word).takeIf {
             it != REMOVE_AT_DEFAULT
-        } ?: return@loadData
+        } ?: return@launch
 
         deleteLearningWordFromKitUseCase(DeleteWordQuery(kit, indexOf))
         removeWordAtLiveData.call(adapterPosition)
         wordKitSizeLiveData.value = kit.size
+        wordKitProgressLiveData.value = KitProgress.from(kit)
+        if (kit.isEmpty) learningWordKitLiveData.value = kit
     }
 
     fun onLearnWordsClick() = loadData {
         predefinedWordKitLiveData.value?.let { predefinedKit ->
             val learningKit = LearningWordKit(predefinedKit, predefinedKit.uuid)
             addLearningWordKitUseCase(learningKit)
-
-            navigateToTestLiveData.call(learningKit)
+            navigateToLearningKitDetailsLiveData.call(learningKit)
         }
 
         learningWordKitLiveData.value?.let { learningWordKit ->
@@ -97,7 +112,17 @@ class KitDetailsViewModel @Inject constructor(
         }
     }
 
-    private companion object {
-        private const val DEFAULT_SIZE = 0
+    data class KitProgress(val progressPercent: Int, val progress: Int, val size: Int) {
+        companion object {
+            fun from(kit: LearningWordKit) = KitProgress(
+                kit.learnProgressPercent.toInt(),
+                kit.learnProgress,
+                kit.size
+            )
+        }
+    }
+
+    companion object {
+        const val DEFAULT_SIZE = 0
     }
 }

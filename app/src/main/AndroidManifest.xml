@@ -55,7 +55,10 @@
 
         <activity
             android:name=".ui.activities.KitDetailsActivity"
-            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activities.SearchActivity"
             android:screenOrientation="portrait" />
     </application>
 

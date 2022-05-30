@@ -15,10 +15,10 @@ abstract class BaseAdapter<BINDING_TYPE : ViewBinding, ELEMENT_TYPE> :
             notifyDataSetChanged()
         }
 
-    fun removeAt(position: Int) {
-        if (position > elements.lastIndex) return
+    open fun removeAt(position: Int) {
         elements.removeAt(position)
         notifyItemRemoved(position)
+        if (itemCount > 0) notifyItemRangeChanged(0, itemCount)
     }
 
     override fun getItemCount(): Int = elements.size

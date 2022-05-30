@@ -28,9 +28,11 @@ abstract class BaseFragment : Fragment() {
     protected abstract fun injectFragment(injector: AppComponent)
     protected abstract fun configureViews()
     protected abstract fun observe(lifecycleOwner: LifecycleOwner)
-    protected fun showLoading() = (requireActivity() as? MainActivity)?.showLoading()
-    protected fun hideLoading() = (requireActivity() as? MainActivity)?.hideLoading()
 
+    private val mainActivity: MainActivity? get() = requireActivity() as? MainActivity
+    protected fun showLoading() = mainActivity?.showLoading()
+    protected fun hideLoading() = mainActivity?.hideLoading()
+    protected fun openMyKits() = mainActivity?.openMyKits()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

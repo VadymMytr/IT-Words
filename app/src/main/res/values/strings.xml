@@ -67,6 +67,14 @@
     <!-- Word Item -->
     <string name="word_item_added_by_user_placeholder">Додано користувачем. Скарг: %d</string>
     <!-- /Word Item -->
+    
+    <!-- Search Activity -->
+    <string name="search_hint">Введіть слово…</string>
+    <string name="search_not_found">Нічого не знайдено 🙈</string>
+    <string name="search_default_text">Почніть вводити слово українською чи англійскою, щоб знайти його у словнику 📚</string>
+    <string name="search_added_to_kit">Слово додано у набір</string>
+    <string name="search_removed_from_kit">Слово прибрано із набору</string>
+    <!-- /Search Activity -->
 
     <string name="oauth_client_id">862495921780-q7he038d0dvi1vnj76cj6lmapi85s8ec.apps.googleusercontent.com</string>
 

@@ -55,13 +55,17 @@ class MainActivity : BaseActivity() {
 
     fun showLoading() {
         with(binding) {
-            mainLoader.isVisible = true
+            mainLoader.root.isVisible = true
         }
     }
 
     fun hideLoading() {
         with(binding) {
-            mainLoader.isVisible = false
+            mainLoader.root.isVisible = false
         }
+    }
+
+    fun openMyKits() {
+        binding.mainPager.currentItem = NavigationTab.MY_KITS.ordinal
     }
 }
