@@ -149,6 +149,7 @@ class RoomDataRepository @Inject constructor(
     }
 
     private suspend fun updateLearningWord(word: Word) {
+        Log.i("TAG", "upd word: ${word.original}, pr = ${word.progress}")
         wordsDao.updateLearningWordBinding(
             wordUUID = word.uuid,
             progress = word.progress,

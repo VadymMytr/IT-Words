@@ -67,7 +67,7 @@
     <!-- Word Item -->
     <string name="word_item_added_by_user_placeholder">Додано користувачем. Скарг: %d</string>
     <!-- /Word Item -->
-    
+
     <!-- Search Activity -->
     <string name="search_hint">Введіть слово…</string>
     <string name="search_not_found">Нічого не знайдено 🙈</string>
@@ -75,6 +75,22 @@
     <string name="search_added_to_kit">Слово додано у набір</string>
     <string name="search_removed_from_kit">Слово прибрано із набору</string>
     <!-- /Search Activity -->
+
+    <!-- Learning Activity -->
+    <string name="learning_title">Вивчення слів</string>
+    <string name="learning_select_correct_translate">Оберіть правильний переклад</string>
+    <string name="learning_select_correct_translate_action">Оберіть правильний переклад:</string>
+    <string name="learning_enter_correct_answer">Введіть правильну відповідь</string>
+    <string name="learning_enter_correct_answer_action">Введіть правильну відповідь:</string>
+    <string name="learning_enter_answer_hint_placeholder">Введіть слово (%d літер)</string>
+    <string name="learning_progress_placeholder">%d / %d</string>
+    <string name="learning_i_dont_know">Я не знаю</string>
+    <string name="learning_test_listen_to_word">Прослухати слово</string>
+    <string name="learning_result_progress_placeholder">Вітаємо! 🎉\nВи відповідли правильно на %d з %d питань!</string>
+    <string name="learning_result_to_kit">До набору</string>
+    <string name="learning_answer_correct">Відповідь вірна 🎉</string>
+    <string name="learning_answer_incorrect">Відповідь невірна 🙈</string>
+    <!-- /Learning Activity -->
 
     <string name="oauth_client_id">862495921780-q7he038d0dvi1vnj76cj6lmapi85s8ec.apps.googleusercontent.com</string>
 

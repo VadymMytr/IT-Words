@@ -37,6 +37,8 @@ class LearningKitsFragment : BaseFragment() {
             learningKitsCreate.setOnClickListener {
                 viewModel.onCreateKitClick()
             }
+
+            learningKitsCreate.isVisible = false
         }
     }
 
@@ -85,7 +87,7 @@ class LearningKitsFragment : BaseFragment() {
 
             showNewKitDialogLiveData.observe(lifecycleOwner) {
                 if (it) {
-                    //TODO show new kit dialog
+
                 }
             }
 

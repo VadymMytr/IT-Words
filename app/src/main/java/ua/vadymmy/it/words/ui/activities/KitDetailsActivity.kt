@@ -1,7 +1,6 @@
 package ua.vadymmy.it.words.ui.activities
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -13,6 +12,7 @@ import ua.vadymmy.it.words.di.AppComponent
 import ua.vadymmy.it.words.domain.models.word.kit.LearningWordKit
 import ua.vadymmy.it.words.domain.models.word.kit.WordKit
 import ua.vadymmy.it.words.ui.activities.SearchActivity.Companion.KEY_SEARCH_BUNDLE_KIT
+import ua.vadymmy.it.words.ui.activities.testing.LearningActivity
 import ua.vadymmy.it.words.ui.adapters.recyclers.WordsAdapter
 import ua.vadymmy.it.words.ui.common.BaseActivity
 import ua.vadymmy.it.words.ui.viewmodels.KitDetailsViewModel
@@ -35,19 +35,16 @@ class KitDetailsActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        Log.i("TAG", "onBackPressed() details")
         finish()
     }
 
     override fun onResume() {
         super.onResume()
-        Log.i("TAG", "onResume() details")
         viewModel.parseIntent(intent)
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        Log.i("TAG", "onNewIntent() details")
         intent?.let { viewModel.parseIntent(it) }
     }
 
@@ -129,19 +126,26 @@ class KitDetailsActivity : BaseActivity() {
 
             navigateToCardsLiveData.observe(lifecycleOwner) { wordKit ->
                 wordKit?.let {
-                    //TODO nav kit cards
+                    startActivity(
+                        WordsDetailsActivity::class.java,
+                        isFinishRequired = false,
+                        intentData = bundleOf(KEY_BUNDLE_WORD_KIT to wordKit)
+                    )
                 }
             }
 
             navigateToTestLiveData.observe(lifecycleOwner) { learningWordKit ->
                 learningWordKit?.let {
-                    //TODO nav test
+                    startActivity(
+                        LearningActivity::class.java,
+                        isFinishRequired = true,
+                        intentData = bundleOf(KEY_BUNDLE_WORD_KIT to learningWordKit)
+                    )
                 }
             }
 
             navigateToLearningKitDetailsLiveData.observe(lifecycleOwner) { learningWordKit ->
                 learningWordKit?.let {
-                    Log.i("TAG", "navigateToLearningKitDetailsLiveData")
                     startActivity(
                         KitDetailsActivity::class.java,
                         isFinishRequired = true,
@@ -173,7 +177,7 @@ class KitDetailsActivity : BaseActivity() {
     private fun fillLearningProgress(kitProgress: KitProgress) {
         with(binding) {
             kitDetailsProgressLayout.isVisible = kitProgress.size != DEFAULT_SIZE
-            kitDetailsProgressBar.setProgress(kitProgress.progressPercent, true)
+            kitDetailsProgressBar.progress = kitProgress.progressPercent
             kitDetailsProgressText.text = getString(
                 R.string.kit_progress_placeholder,
                 kitProgress.progress,

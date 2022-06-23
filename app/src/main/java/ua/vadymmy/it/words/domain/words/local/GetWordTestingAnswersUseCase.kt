@@ -12,7 +12,9 @@ class GetWordTestingAnswersUseCase @Inject constructor(
 ) : BackgroundUseCase<Word, List<Word>>() {
 
     override suspend fun execute(request: Word): List<Word> {
-        return localRepository.getRandomWords(OTHER_TEST_VARIANTS_AMOUNT)
+        return localRepository.getRandomWords(OTHER_TEST_VARIANTS_AMOUNT).toMutableList().apply {
+            add(request)
+        }
     }
 
     companion object {

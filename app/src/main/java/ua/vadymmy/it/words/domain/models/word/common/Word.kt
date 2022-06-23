@@ -17,8 +17,8 @@ open class Word(
     val wordProgress: WordProgress
         get() = WordProgress.from(progress)
 
-    fun isCorrectTranslate(translate: String) = translate.lowercase() == translate.lowercase()
-    fun isCorrectAnswer(answer: String) = original.lowercase() == answer.lowercase()
+    fun isCorrectTranslate(translate: String) = this.translate.lowercase() == translate.lowercase()
+    fun isCorrectAnswer(answer: String) = this.original.lowercase() == answer.lowercase()
     val answerRequiredLength get() = original.length
 
     constructor(wordEntity: WordEntity, progress: Int = WordProgress.NONE) : this(

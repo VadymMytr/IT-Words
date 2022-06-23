@@ -10,6 +10,7 @@ import ua.vadymmy.it.words.databinding.FragmentMainBinding
 import ua.vadymmy.it.words.di.AppComponent
 import ua.vadymmy.it.words.domain.models.user.User
 import ua.vadymmy.it.words.ui.activities.AuthActivity
+import ua.vadymmy.it.words.ui.activities.SyncActivity
 import ua.vadymmy.it.words.ui.activities.UserLevelsActivity
 import ua.vadymmy.it.words.ui.common.BaseFragment
 import ua.vadymmy.it.words.ui.viewmodels.MainFragmentViewModel
@@ -36,6 +37,10 @@ class MainFragment : BaseFragment() {
 
             mainKitsButton.setOnClickListener {
                 openMyKits()
+            }
+
+            mainSyncButton.setOnClickListener {
+                startActivity(SyncActivity::class.java, isFinishRequired = true)
             }
         }
     }

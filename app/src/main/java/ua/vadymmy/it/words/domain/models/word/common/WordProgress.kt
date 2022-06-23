@@ -8,14 +8,18 @@ sealed class WordProgress {
     }
 
     enum class TestType(private val atProgress: Int) {
-        EN_VOICE_UA_SELECT(atProgress = 1),
-        UA_TRANSLATE_EN_SELECT(atProgress = 2),
-        UA_TRANSLATE_EN_INPUT(atProgress = 3);
+        EN_VOICE_UA_SELECT(atProgress = 0),
+        UA_TRANSLATE_EN_SELECT(atProgress = 1),
+        UA_TRANSLATE_EN_INPUT(atProgress = 2);
 
         companion object {
-            fun from(inProgress: InProgress) = values().find {
-                it.atProgress == inProgress.progress
-            } ?: EN_VOICE_UA_SELECT
+            fun from(inProgress: WordProgress) = try {
+                values().find {
+                    it.atProgress == (inProgress as InProgress).progress
+                } ?: EN_VOICE_UA_SELECT
+            } catch (ex: Exception) {
+                EN_VOICE_UA_SELECT
+            }
         }
     }
 

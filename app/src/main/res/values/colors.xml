@@ -34,5 +34,6 @@
 
     <!-- Image colors -->
     <color name="colorTranslucentImage">#59000000</color>
+    <color name="colorTranslucentImageDark">#99000000</color>
     <!-- /Image colors -->
 </resources>

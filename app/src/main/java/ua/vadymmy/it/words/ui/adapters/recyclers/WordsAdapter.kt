@@ -67,7 +67,7 @@ open class WordsAdapter(
     @CallSuper
     open fun updateWordButtons(binding: ItemWordBinding, element: Word, adapterPosition: Int) {
         with(binding) {
-            wordItemDeleteButton.isVisible = isLearningKit
+            wordItemDeleteButton.isVisible = false
             wordItemDeleteButton.setOnClickListener {
                 onWordRemoveClick(element, adapterPosition)
             }

@@ -18,7 +18,7 @@
             android:layout_height="48dp"
             android:layout_weight="1.5"
             android:background="@drawable/selector_btn_outline_primary"
-            android:padding="5dp"
+            android:padding="12dp"
             app:lottie_autoPlay="false"
             app:lottie_loop="false"
             app:lottie_rawRes="@raw/speaking" />

@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ua.vadymmy.it.words.utils.call
 import ua.vadymmy.it.words.utils.emit
 
 open class BaseViewModel : ViewModel() {
@@ -42,7 +41,7 @@ open class BaseViewModel : ViewModel() {
     }
 
     protected fun showMessage(@StringRes titleRes: Int) {
-        showMessageLiveData.call(titleRes)
+        showMessageLiveData.postValue(titleRes)
     }
 
     protected fun onLoadingStart() = showLoader(isLoading = true)
